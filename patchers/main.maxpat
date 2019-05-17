@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 154.0, 79.0, 819.0, 661.0 ],
+		"rect" : [ 154.0, 79.0, 815.0, 661.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -89,8 +89,8 @@
 						"followglobaltempo" : 0,
 						"formantcorrection" : 0,
 						"mode" : "basic",
-						"originallength" : [ 0.0, "ticks" ],
-						"originaltempo" : 120.0,
+						"originallength" : [ 867.134693877550831, "ticks" ],
+						"originaltempo" : 119.999999999999986,
 						"pitchcorrection" : 0,
 						"quality" : "basic",
 						"timestretch" : [ 0 ]
@@ -132,8 +132,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 63.0, 304.0, 150.0, 76.0 ],
-					"text" : "\"/Users/lorenzo/Documents/Max 8/Projects/lang-sampler/code/tmp/word15379vubX2b02Y08s.mp3\""
+					"patching_rect" : [ 107.0, 307.0, 150.0, 76.0 ],
+					"text" : "\"/Users/lorenzo/Documents/Max 8/Projects/lang-sampler/code/tmp/word19415kxJlSkI6I89S.mp3\""
 				}
 
 			}
@@ -208,7 +208,7 @@
 					"outlettype" : [ "", "int", "", "" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 63.0, 62.0, 100.0, 50.0 ],
-					"text" : "hello",
+					"text" : "london",
 					"wordwrap" : 0
 				}
 
@@ -252,7 +252,7 @@
 					"numoutlets" : 1,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 238.0, 193.0, 400.0, 220.0 ],
+					"patching_rect" : [ 289.0, 193.0, 400.0, 220.0 ],
 					"viewvisibility" : 1
 				}
 
@@ -269,6 +269,8 @@
 					"saved_object_attributes" : 					{
 						"autostart" : 1,
 						"defer" : 0,
+						"node_bin_path" : "",
+						"npm_bin_path" : "",
 						"watch" : 1
 					}
 ,
@@ -280,14 +282,23 @@
 		"lines" : [ 			{
 				"patchline" : 				{
 					"destination" : [ "obj-2", 0 ],
-					"midpoints" : [ 203.5, 287.0, 226.5, 287.0, 226.5, 174.0, 247.5, 174.0 ],
+					"midpoints" : [ 203.5, 287.0, 248.5, 287.0, 248.5, 174.0, 298.5, 174.0 ],
 					"source" : [ "obj-1", 1 ]
 				}
 
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-3", 0 ],
+					"order" : 1,
+					"source" : [ "obj-1", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-5", 1 ],
+					"order" : 0,
 					"source" : [ "obj-1", 0 ]
 				}
 
@@ -361,13 +372,6 @@
 				"patchline" : 				{
 					"destination" : [ "obj-42", 0 ],
 					"source" : [ "obj-43", 1 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-3", 0 ],
-					"source" : [ "obj-5", 0 ]
 				}
 
 			}

@@ -3,4 +3,4 @@
 /*/node_modules
 /code/tmp
 *.maxproj
-/package-lock.json
+package-lock.json
