@@ -1,3 +1,4 @@
+const maxApi = require('max-api')
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -6,6 +7,9 @@ const axios = require('axios');
 // Initialize axios headers
 axios.defaults.headers.common['app_id'] = process.env.OXFORD_APP_ID;
 axios.defaults.headers.common['app_key'] = process.env.OXFORD_APP_KEY;
+
+maxApi.post(`app_id: ${process.env.OXFORD_APP_ID}`);
+maxApi.post(`app_key: ${process.env.OXFORD_APP_KEY}`);
 
 const BASE_PATH = "https://od-api.oxforddictionaries.com";
 
