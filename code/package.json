@@ -1,0 +1,29 @@
+{
+  "name": "lang-sampler",
+  "version": "1.0.0",
+  "description": "A node app used with Max MSP to create a dictionary-based audio sampler",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "dotenv": "^8.0.0",
+    "path": "^0.12.7",
+    "tmp": "^0.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://bitbucket.org/lorenzorivosecchi/lang-sampler.git"
+  },
+  "keywords": [
+    "Max-MSP",
+    "sampling",
+    "languages",
+    "api"
+  ],
+  "author": "Lorenzo Rivosecchi",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/lorenzorivosecchi/lang-sampler#readme"
+}
