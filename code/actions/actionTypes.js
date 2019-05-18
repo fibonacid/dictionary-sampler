@@ -1,3 +1,5 @@
 export const types = {
-   GET_WORD: "GET_WORD"
-}
+   GET_WORD: "GET_WORD",
+   GET_WORD_SUCCESS: "GET_WORD_SUCCESS",
+   GET_WORD_ERROR: "GET_WORD_ERROR"
+};
