@@ -8,12 +8,14 @@ export const words = function mediaReducer(state={}, action) {
          return {
             ...state
          }
+
       case types.GET_WORD_SUCCESS:
          return {
             ...state,
             payload: action.payload,
             success: action.success
          }
+
       case types.GET_WORD_ERROR:
          return {
             ...state,
