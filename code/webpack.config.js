@@ -6,6 +6,8 @@ module.exports = {
       path: path.resolve(__dirname, 'dist'),
       filename: 'bundle.js'
    },
+   // https://github.com/axios/axios/issues/456#issuecomment-285287911
+   target: 'node',
    module: {
       rules: [
          {
