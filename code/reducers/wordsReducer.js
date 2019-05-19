@@ -22,5 +22,7 @@ export const words = (state={}, action) => {
             payload:action.payload,
             error: action.error
          }
+      default:
+         return state
    }
 }
