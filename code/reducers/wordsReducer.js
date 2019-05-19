@@ -1,12 +1,12 @@
 import {types} from "../actions/actionTypes";
 
-export const words = function mediaReducer(state={}, action) {
+export const words = (state={}, action) => {
 
    switch(action.type) {
 
       case types.GET_WORD:
          return {
-            ...state
+            ...state,
          }
 
       case types.GET_WORD_SUCCESS:
