@@ -7,19 +7,16 @@ const sagaMiddleware = createSagaMiddleware();
 
 const clc = require('cli-color');
 
-function logger({getState}) {
+function logAction() {
    return next => action => {
-      console.log(clc.blue(
-`dispatching action => ${action.type} 
-${JSON.stringify(getState(), null, 3)}
-`))
+      console.log(clc.blue(`dispatching action => ${action.type}`));
       return next(action)
    }
 }
 
 export const store = createStore(
    rootReducer,
-   applyMiddleware(logger, sagaMiddleware)
+   applyMiddleware(logAction, sagaMiddleware)
 )
 
 sagaMiddleware.run(rootSaga)
