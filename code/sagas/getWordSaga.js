@@ -11,10 +11,10 @@ export function* getWordWatcher() {
 
 export function* getWordSaga(action) {
    const payload = yield call(getWordRequest, action.payload);
-   if (typeof payload !== "undefined") {
+   if (payload.status == 200) {
       yield put({type: types.GET_WORD_SUCCESS, payload: digestResponse(payload)})
    } else {
-      yield put({type: types.GET_WORD_ERROR, error: "error"})
+      yield put({type: types.GET_WORD_ERROR, error: payload.error})
    }
 }
 
@@ -24,7 +24,5 @@ export function getWordRequest(word) {
 }
 
 function digestResponse({data}) {
-   if (data) {
-      return data
-   }
+   return data
 }
