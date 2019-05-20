@@ -1,6 +1,9 @@
 import {types} from '../actions/actionTypes'
 import { takeLatest, call, put } from 'redux-saga/effects'
-import Axios from "axios";
+import axios from "axios";
+import {initAxios} from "../helpers/initAxios";
+
+initAxios(axios);
 
 export function* getWordWatcher() {
    const saga = yield takeLatest(types.GET_WORD, getWordSaga)
@@ -17,15 +20,7 @@ export function* getWordSaga(action) {
 
 export function getWordRequest(word) {
    // Initialize request headers
-   return Axios({
-      url: `https://od-api.oxforddictionaries.com/api/v2/entries/en-us/${word}`,
-      method: 'GET',
-      headers: {
-         "app_id": "ec9de178",
-         "app_key": "82d2a2435338334b58fc53b4ed458521"
-      },
-      accept: 'json'
-   })
+   return axios.get(`https://od-api.oxforddictionaries.com/api/v2/entries/en-us/${word}`)
 }
 
 function digestResponse({data}) {
