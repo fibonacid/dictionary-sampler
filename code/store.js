@@ -9,7 +9,10 @@ const clc = require('cli-color');
 
 function logAction() {
    return next => action => {
-      console.log(clc.blue(`dispatching action => ${action.type}`));
+      console.log();
+      console.log(clc.magenta(`dispatching action => ${action.type}`));
+      console.log(clc.magenta(JSON.stringify(action.payload, null, 3)));
+      console.log();
       return next(action)
    }
 }
