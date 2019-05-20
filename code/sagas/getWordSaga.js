@@ -21,6 +21,7 @@ export function* getWordSaga(action) {
 export function getWordRequest({word, filters=[]}) {
    let url = `https://od-api.oxforddictionaries.com/api/v2/entries/en-us/${word}`;
    url += getFilterParams(filters);
+   console.log(url)
    return axios.get(url)
             .catch((error) => (error))
 }
@@ -37,6 +38,9 @@ function getFilterParams(filters) {
       filters.forEach((f) => {
          if (typeof f === "string") {
             params += f
+            if (f !== [...filters].pop()) {
+               params += "&&"
+            }
          }
       })
    }
