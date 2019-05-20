@@ -1,15 +1,15 @@
 import {store} from './store';
 import {getWordAction} from './actions/getWordAction'
-const clc = require('cli-color')
-
+import oxford from './helpers/apiConstants'
 
 const handleStateChange = () => {
    let state = store.getState();
-   console.log(clc.blue(JSON.stringify(state, null, 3)))
 }
 
 store.subscribe(handleStateChange);
 
-store.dispatch(getWordAction('hello'));
+let filters = oxford.filters.pronunciations;
+
+store.dispatch(getWordAction('hello', [filters]));
 
 
