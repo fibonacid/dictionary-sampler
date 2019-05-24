@@ -14,21 +14,22 @@ export function* getWordSaga(action) {
    if (payload.status == 200) {
       yield put({type: types.GET_WORD_SUCCESS, payload: digestResponse(payload)})
    } else {
-      yield put({type: types.GET_WORD_ERROR, payload: payload.error})
+      yield put({type: types.GET_WORD_ERROR })
    }
 }
 
-export function getWordRequest({word, filters=[]}) {
-   let url = `https://od-api.oxforddictionaries.com/api/v2/entries/en-us/${word}`;
+export function getWordRequest({word, params}) {
+   let { lang, filters } = params;
+   let url = `https://od-api.oxforddictionaries.com/api/v2/entries/${lang}/${word}`;
    url += getFilterParams(filters);
    console.log(url)
    return axios.get(url)
-            .catch((error) => (error))
+      .catch((error)=>(error))
 }
 
 
 function digestResponse({data}) {
-   return data
+   return data.results[0].lexicalEntries[0];
 }
 
 function getFilterParams(filters) {

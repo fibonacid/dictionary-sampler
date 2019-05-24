@@ -1,8 +1,15 @@
 import {types} from './actionTypes'
 
-export function getWordAction(word, filters=[]) {
+const defaultParams = {
+   lang: "en-us"
+}
+
+export function getWordAction(word, params={}) {
    return {
       type: types.GET_WORD,
-      payload: {word, filters},
+      payload: {
+         word,
+         params: {...defaultParams, ...params}
+      },
    }
 }

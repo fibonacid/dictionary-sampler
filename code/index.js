@@ -8,8 +8,10 @@ const handleStateChange = () => {
 
 store.subscribe(handleStateChange);
 
-let filters = [oxford.filters.pronunciations, oxford.filters.examples];
+const params = {
+   filters: [oxford.filters.pronunciations]
+}
 
-store.dispatch(getWordAction('hello', filters));
+store.dispatch(getWordAction('hello', params));
 
 
