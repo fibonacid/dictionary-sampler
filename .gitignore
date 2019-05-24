@@ -3,6 +3,5 @@
 /*/node_modules
 /code/tmp
 *.maxproj
-package-lock.json
 /*/dist
 /*/tmp
