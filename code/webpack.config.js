@@ -24,9 +24,10 @@ module.exports = {
       ]
    },
    plugins: [
-      new Dotenv()
+      new Dotenv(),
+      new webpack.IgnorePlugin(/max_interface/)
    ],
    node: {
       fs: 'empty' // https://github.com/webpack-contrib/css-loader/issues/447
-   }
+   },
 };
