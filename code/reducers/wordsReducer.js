@@ -19,6 +19,7 @@ export const words = (state=[], action) => {
       case types.GET_WORD_ERROR:
          return [
             ...state,
+            action.payload
          ]
 
       default:
