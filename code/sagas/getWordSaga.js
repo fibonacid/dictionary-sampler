@@ -29,7 +29,7 @@ export function getWordRequest({word, params}) {
 
 
 function digestResponse({data}) {
-   return data.results[0].lexicalEntries[0];
+   return data.results;
 }
 
 function getFilterParams(filters) {
