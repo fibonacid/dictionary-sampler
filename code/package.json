@@ -10,6 +10,7 @@
     "dotenv-webpack": "^1.7.0",
     "lodash": "^4.17.11",
     "path": "^0.12.7",
+    "prettier": "^1.17.1",
     "redux": "^4.0.1",
     "redux-saga": "^1.0.2",
     "tmp": "^0.1.0"
