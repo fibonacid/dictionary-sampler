@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 154.0, 79.0, 815.0, 661.0 ],
+		"rect" : [ 436.0, 105.0, 480.0, 661.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -39,76 +39,24 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
-					"id" : "obj-18",
-					"maxclass" : "gain~",
-					"multichannelvariant" : 0,
+					"id" : "obj-5",
+					"maxclass" : "dict.view",
 					"numinlets" : 1,
-					"numoutlets" : 2,
-					"outlettype" : [ "signal", "" ],
-					"parameter_enable" : 0,
-					"patching_rect" : [ 66.5, 548.0, 99.0, 20.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-17",
-					"local" : 1,
-					"maxclass" : "ezdac~",
-					"numinlets" : 2,
 					"numoutlets" : 0,
-					"patching_rect" : [ 66.0, 596.0, 44.0, 44.0 ],
-					"prototypename" : "helpfile"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-42",
-					"maxclass" : "button",
-					"numinlets" : 1,
-					"numoutlets" : 1,
-					"outlettype" : [ "bang" ],
-					"parameter_enable" : 0,
-					"patching_rect" : [ 97.5, 515.0, 24.0, 24.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 13.0,
-					"id" : "obj-43",
-					"maxclass" : "newobj",
-					"numinlets" : 2,
-					"numoutlets" : 2,
-					"outlettype" : [ "signal", "bang" ],
-					"patching_rect" : [ 66.5, 483.0, 50.0, 23.0 ],
-					"saved_object_attributes" : 					{
-						"basictuning" : 440,
-						"followglobaltempo" : 0,
-						"formantcorrection" : 0,
-						"mode" : "basic",
-						"originallength" : [ 867.134693877550831, "ticks" ],
-						"originaltempo" : 119.999999999999986,
-						"pitchcorrection" : 0,
-						"quality" : "basic",
-						"timestretch" : [ 0 ]
-					}
-,
-					"text" : "sfplay~"
+					"patching_rect" : [ 63.0, 421.0, 341.0, 181.0 ]
 				}
 
 			}
 , 			{
 				"box" : 				{
 					"id" : "obj-8",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 2,
-					"outlettype" : [ "int", "" ],
-					"patching_rect" : [ 63.0, 442.0, 31.0, 22.0 ],
-					"text" : "t 1 s"
+					"linecount" : 4,
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 130.0, 327.0, 50.0, 62.0 ],
+					"text" : "dictionary u175003354"
 				}
 
 			}
@@ -116,24 +64,17 @@
 				"box" : 				{
 					"id" : "obj-3",
 					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 63.0, 404.0, 83.0, 22.0 ],
-					"text" : "prepend open"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-5",
-					"linecount" : 5,
-					"maxclass" : "message",
 					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 107.0, 307.0, 150.0, 76.0 ],
-					"text" : "\"/Users/lorenzo/Documents/Max 8/Projects/lang-sampler/code/tmp/word19415kxJlSkI6I89S.mp3\""
+					"numoutlets" : 4,
+					"outlettype" : [ "dictionary", "", "", "" ],
+					"patching_rect" : [ 63.0, 387.0, 50.5, 22.0 ],
+					"saved_object_attributes" : 					{
+						"embed" : 0,
+						"parameter_enable" : 0,
+						"parameter_mappable" : 0
+					}
+,
+					"text" : "dict"
 				}
 
 			}
@@ -184,11 +125,11 @@
 					"patching_rect" : [ 63.0, 27.0, 24.0, 24.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_shortname" : "button",
-							"parameter_enum" : [ "off", "on" ],
 							"parameter_type" : 2,
 							"parameter_longname" : "button",
-							"parameter_mmax" : 1
+							"parameter_mmax" : 1,
+							"parameter_shortname" : "button",
+							"parameter_enum" : [ "off", "on" ]
 						}
 
 					}
@@ -252,7 +193,7 @@
 					"numoutlets" : 1,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 289.0, 193.0, 400.0, 220.0 ],
+					"patching_rect" : [ 259.0, 169.0, 400.0, 220.0 ],
 					"viewvisibility" : 1
 				}
 
@@ -265,7 +206,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 63.0, 234.0, 150.0, 35.0 ],
+					"patching_rect" : [ 63.0, 234.0, 170.0, 35.0 ],
 					"saved_object_attributes" : 					{
 						"autostart" : 1,
 						"defer" : 0,
@@ -274,7 +215,7 @@
 						"watch" : 1
 					}
 ,
-					"text" : "node.script index.js @autostart 1 @watch 1"
+					"text" : "node.script max_interface.js @autostart 1 @watch 1"
 				}
 
 			}
@@ -282,7 +223,7 @@
 		"lines" : [ 			{
 				"patchline" : 				{
 					"destination" : [ "obj-2", 0 ],
-					"midpoints" : [ 203.5, 287.0, 248.5, 287.0, 248.5, 174.0, 298.5, 174.0 ],
+					"midpoints" : [ 223.5, 287.0, 248.5, 287.0, 248.5, 174.0, 268.5, 174.0 ],
 					"source" : [ "obj-1", 1 ]
 				}
 
@@ -297,7 +238,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-5", 1 ],
+					"destination" : [ "obj-8", 1 ],
 					"order" : 0,
 					"source" : [ "obj-1", 0 ]
 				}
@@ -326,22 +267,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-17", 1 ],
-					"order" : 0,
-					"source" : [ "obj-18", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-17", 0 ],
-					"order" : 1,
-					"source" : [ "obj-18", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-16", 0 ],
 					"source" : [ "obj-20", 0 ]
 				}
@@ -349,7 +274,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-8", 0 ],
+					"destination" : [ "obj-5", 0 ],
 					"source" : [ "obj-3", 0 ]
 				}
 
@@ -358,20 +283,6 @@
 				"patchline" : 				{
 					"destination" : [ "obj-1", 0 ],
 					"source" : [ "obj-4", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-18", 0 ],
-					"source" : [ "obj-43", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-42", 0 ],
-					"source" : [ "obj-43", 1 ]
 				}
 
 			}
@@ -389,20 +300,6 @@
 				}
 
 			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-43", 0 ],
-					"source" : [ "obj-8", 1 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-43", 0 ],
-					"source" : [ "obj-8", 0 ]
-				}
-
-			}
  ],
 		"parameters" : 		{
 			"obj-13" : [ "button", "button", 0 ],
@@ -413,9 +310,9 @@
 		}
 ,
 		"dependency_cache" : [ 			{
-				"name" : "index.js",
-				"bootpath" : "~/Documents/Max 8/Projects/lang-sampler/code",
-				"patcherrelativepath" : "../code",
+				"name" : "max_interface.js",
+				"bootpath" : "~/Documents/Max 8/Projects/lang-sampler/code/dist",
+				"patcherrelativepath" : "../code/dist",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
