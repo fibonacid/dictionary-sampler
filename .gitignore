@@ -3,5 +3,5 @@
 /*/node_modules
 /code/tmp
 *.maxproj
-/*/dist
+/*/dist/bundle.js
 /*/tmp
