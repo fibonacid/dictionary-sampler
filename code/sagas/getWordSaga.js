@@ -22,13 +22,46 @@ export function getWordRequest({word, params}) {
    let { lang, filters } = params;
    let url = `https://od-api.oxforddictionaries.com/api/v2/entries/${lang}/${word}`;
    url += getFilterParams(filters);
-   console.log(url)
    return axios.get(url)
       .catch((error)=>(error))
 }
 
 
 function digestResponse({data}) {
+   // If object is composed as expected
+   if (data.results &&
+       Array.isArray(data.results) &&
+       data.results.length > 0
+   ) {
+      // Retrieve word
+      const word = data.results[0];
+      const { id, language, lexicalEntries } = word;
+      const pronunciations = {};
+
+      // Loop through every lexical entry
+      lexicalEntries.forEach( entry => {
+         // If theres a registry called pronunciations
+         if (entry.pronunciations &&
+            Array.isArray(entry.pronunciations)
+         ) {
+            // Loop through every pronunciation
+            entry.pronunciations.forEach( p => {
+               // If thers an audio file attached:
+               if (p.audioFile) {
+                  // Add it to the list
+                  pronunciations[`${p.phoneticSpelling}`] = {
+                     audioFile: p.audioFile
+                  };
+               }
+            });
+         }
+      });
+      return {
+         id,
+         language,
+         pronunciations
+      }
+   }
    return data.results;
 }
 
