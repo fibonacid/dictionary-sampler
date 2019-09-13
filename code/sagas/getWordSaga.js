@@ -1,9 +1,26 @@
 import {types} from '../actions/actionTypes'
-import { takeLatest, call, put } from 'redux-saga/effects'
+import { takeLatest, call, put, select } from 'redux-saga/effects'
 import axios from "axios";
 import {initAxios} from "../helpers/initAxios";
+import {cacheWordAudioAction} from "../actions/cacheWordAudioAction";
+import {cacheWordAudioSaga} from "./cacheWordAudioSaga";
 
 initAxios(axios);
+
+const lastWordSelector = state => {
+   const { words } = state;
+   if (words && words.index && words.data) {
+      // If index is an array
+      if (Array.isArray(words.index)) {
+         // Get id of last item in the array
+         const id = words.index[words.index.length - 1];
+         // If id is a string
+         if (typeof id === "string") {
+            return words[`${id}`];
+         }
+      }
+   }
+};
 
 export function* getWordWatcher() {
    const saga = yield takeLatest(types.GET_WORD, getWordSaga)
@@ -12,7 +29,13 @@ export function* getWordWatcher() {
 export function* getWordSaga(action) {
    const payload = yield call(getWordRequest, action.payload);
    if (payload.status == 200) {
+      // Digest response
       yield put({type: types.GET_WORD_SUCCESS, payload: digestResponse(payload)})
+
+      const word_id = yield select(lastWordSelector);
+      // Cache audio file
+      yield put(cacheWordAudioAction(word_id));
+
    } else {
       yield put({type: types.GET_WORD_ERROR })
    }
