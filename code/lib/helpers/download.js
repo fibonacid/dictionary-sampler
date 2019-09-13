@@ -2,9 +2,11 @@ const fs = require('fs')
 const path = require('path')
 const axios = require('axios/index')
 
-const download = async (url, dest) => {
+export const download = async (url, dest) => {
 
-   const writer = fs.createWriteStream(dest)
+   console.log(`... loading from ${url}`);
+
+   const writer = fs.createWriteStream(dest);
 
    const response = await axios({
       url,
@@ -15,9 +17,7 @@ const download = async (url, dest) => {
    response.data.pipe(writer)
 
    return new Promise((resolve, reject) => {
-      writer.on('finish', resolve)
-      writer.on('error', reject)
+      writer.on('finish', resolve);
+      writer.on('error', reject);
    });
 };
-
-module.exports = download
