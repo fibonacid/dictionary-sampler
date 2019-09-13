@@ -17,7 +17,7 @@ const handlers = {
    get_word: (word) => {
       store.dispatch(getWordAction(word));
    }
-}
+};
 
 /** */
 maxAPI.addHandlers(handlers);
