@@ -16,6 +16,6 @@ function logAction() {
 export const store = createStore(
    rootReducer,
    applyMiddleware(logAction, sagaMiddleware)
-)
+);
 
 sagaMiddleware.run(rootSaga)
