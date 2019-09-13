@@ -7,7 +7,7 @@ const defaultParams = {
       OXFORD_API.FILTERS.PRONUNCIATIONS,
       OXFORD_API.FILTERS.EXAMPLES
    ]
-}
+};
 
 export function getWordAction(word, params={}) {
    return {
@@ -17,4 +17,4 @@ export function getWordAction(word, params={}) {
          params: {...defaultParams, ...params}
       },
    }
-}
+};
