@@ -15,7 +15,7 @@ const lastWordSelector = state => {
          const id = words.index[words.index.length - 1];
          // If id is a string
          if (typeof id === "string") {
-            return words[`${id}`];
+            return words.data[`${id}`];
          }
       }
    }
@@ -27,13 +27,16 @@ export function* getWordWatcher() {
 
 export function* getWordSaga(action) {
    const payload = yield call(getWordRequest, action.payload);
-   if (payload.status == 200) {
+   if (payload.status === 200) {
       // Digest response
-      yield put({type: types.GET_WORD_SUCCESS, payload: digestResponse(payload)})
+      yield put({type: types.GET_WORD_SUCCESS, payload: digestResponse(payload)});
 
-      const word_id = yield select(lastWordSelector);
+      const word = yield select(lastWordSelector);
+
+      yield call(word => { console.log(`getWordSaga: ${word}`) }, word);
+
       // Cache audio file
-      yield put(cacheWordAudioAction(word_id));
+      yield put({type: types.CACHE_WORD_AUDIO, payload: word});
 
    } else {
       yield put({type: types.GET_WORD_ERROR })
