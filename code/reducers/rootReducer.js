@@ -1,6 +1,8 @@
 import {combineReducers} from 'redux';
-import {words} from './wordsReducer'
+import {wordsReducer} from './wordsReducer'
+import {cacheReducer} from "./cacheReducer";
 
 export const rootReducer = combineReducers({
-   words
-})
+   words: wordsReducer,
+   cache: cacheReducer
+});
