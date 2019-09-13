@@ -5,14 +5,10 @@ import {rootReducer} from './reducers/rootReducer'
 
 const sagaMiddleware = createSagaMiddleware();
 
-const clc = require('cli-color');
-
 function logAction() {
    return next => action => {
-      console.log();
-      console.log(clc.magenta(`dispatching action => ${action.type}`));
-      console.log(clc.magenta(JSON.stringify(action.payload, null, 3)));
-      console.log();
+      console.log(`dispatching action => ${action.type}`);
+      //console.log(JSON.stringify(action.payload, null, 3));
       return next(action)
    }
 }
