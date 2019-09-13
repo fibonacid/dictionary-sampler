@@ -1,7 +1,16 @@
-/node_modules
-/.idea
-/*/node_modules
-/code/tmp
+# Ignore node
+code/node_modules
+
+# Ignore jetbrains
+.idea
+
+# Ignore max
 *.maxproj
-/*/dist/bundle.js
-/*/tmp
+
+# Ignore webpack
+code/dist/bundle.js
+
+# Ignore cache files
+code/cache/*
+!code/cache/.gitkeep
+
