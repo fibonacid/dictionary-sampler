@@ -1,6 +1,9 @@
+import {initAxios} from './initAxios';
+import axios from 'axios';
+
 const fs = require('fs')
-const path = require('path')
-const axios = require('axios/index')
+
+initAxios(axios);
 
 export const download = async (url, dest) => {
 
@@ -8,13 +11,17 @@ export const download = async (url, dest) => {
 
    const writer = fs.createWriteStream(dest);
 
+   writer.on('error', function (err) {
+      console.log(err);
+   });
+
    const response = await axios({
       url,
       method: 'GET',
       responseType: 'stream'
    });
 
-   response.data.pipe(writer)
+   response.data.pipe(writer);
 
    return new Promise((resolve, reject) => {
       writer.on('finish', resolve);

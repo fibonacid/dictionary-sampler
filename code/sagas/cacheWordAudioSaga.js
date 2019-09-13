@@ -12,22 +12,39 @@ export function* cacheWordAudioSaga(action) {
 }
 
 const path = require('path');
+const tmp = require('tmp');
 
 function downloadAudio(payload) {
-   const { id, pronunciations } = payload;
-   const dir = path.resolve(__dirname, "../../cache");
+   const { pronunciations } = payload;
+   const dir = `${global.appRoot}/cache`;
+   const cacheDir = path.resolve(dir, "");
+   console.log(`cache directory: ${cacheDir}`);
    if (pronunciations) {
-      Object.keys(pronunciations).forEach(function(key) {
-         const filename = uniqueFilename(dir, id);
+      Object.keys(payload.pronunciations).forEach(function(key) {
+         const filename = uniqueFilename(cacheDir) + ".mp3";
          let { url } = pronunciations[key];
-         console.log(`cache file: ${filename}`);
+         console.log(`file for ${key}: ${filename}`);
          download(url, filename)
-            .then(function () {
-               console.log(`${key} loaded`);
-            })
-            .catch( error => {
-               console.log(error);
-            })
+            .then(() => { console.log(`download finished`) })
+            .catch(error => { console.log(error) })
       });
    }
 }
+
+/*
+ const options = {
+            prefix: filename,
+            postfix: `.mp3`,
+            dir: `${global.appRoot}/cache`
+         };
+ tmp.file(options, (err, path) => {
+            if (err) throw err;
+            download(url, filename)
+               .then(function () {
+                  console.log(`${key}: download complete`);
+               })
+               .catch( error => {
+                  console.log(error);
+               })
+         });
+ */
