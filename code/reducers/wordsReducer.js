@@ -1,28 +1,33 @@
 import {types} from "../actions/actionTypes";
 import _ from 'lodash'
 
-export const words = (state=[], action) => {
+export const wordsReducer = (state={}, action) => {
 
    switch(action.type) {
-
       case types.GET_WORD:
-         return [
-            ...state,
-         ]
-
+         return state;
       case types.GET_WORD_SUCCESS:
-         return [
-            ...state,
-            action.payload
-         ]
-
+         return digestGetWord(state, action.payload);
       case types.GET_WORD_ERROR:
-         return [
-            ...state,
-            action.payload
-         ]
-
+         return state;
       default:
          return state
    }
+};
+
+function digestGetWord (prevState, payload) {
+   const nextState = {
+      data: {},
+      index: []
+   };
+
+   if (payload && payload.id) {
+      nextState.data[`${payload.id}`] = payload;
+      nextState.index.push(`${payload.id}`);
+   }
+
+   const data = _.merge({}, prevState.data, nextState.data);
+   const index = _.union([], prevState.index, nextState.index);
+
+   return { index, data }
 }
