@@ -13,7 +13,8 @@
     "prettier": "^1.17.1",
     "redux": "^4.0.1",
     "redux-saga": "^1.0.2",
-    "tmp": "^0.1.0"
+    "tmp": "^0.1.0",
+    "unique-filename": "^1.1.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
