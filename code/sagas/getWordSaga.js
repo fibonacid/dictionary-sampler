@@ -50,7 +50,7 @@ function digestResponse({data}) {
                if (p.audioFile) {
                   // Add it to the list
                   pronunciations[`${p.phoneticSpelling}`] = {
-                     audioFile: p.audioFile
+                     url: p.audioFile
                   };
                }
             });
