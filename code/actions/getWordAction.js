@@ -1,5 +1,5 @@
 import {types} from './actionTypes'
-import {OXFORD_API} from "../config/apiConstants";
+import {OXFORD_API} from "../lib/config/apiConstants";
 
 const defaultParams = {
    lang: "en-us",

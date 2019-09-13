@@ -1,9 +1,8 @@
 import {types} from '../actions/actionTypes'
 import { takeLatest, call, put, select } from 'redux-saga/effects'
 import axios from "axios";
-import {initAxios} from "../helpers/initAxios";
+import {initAxios} from "../lib/helpers/initAxios";
 import {cacheWordAudioAction} from "../actions/cacheWordAudioAction";
-import {cacheWordAudioSaga} from "./cacheWordAudioSaga";
 
 initAxios(axios);
 
@@ -48,7 +47,6 @@ export function getWordRequest({word, params}) {
    return axios.get(url)
       .catch((error)=>(error))
 }
-
 
 function digestResponse({data}) {
    // If object is composed as expected

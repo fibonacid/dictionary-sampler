@@ -2,7 +2,7 @@ const maxApi = require('max-api')
 const dotenv = require("dotenv");
 dotenv.config();
 
-const axios = require('axios');
+const axios = require('axios/index');
 
 // Initialize axios headers
 axios.defaults.headers.common['app_id'] = process.env.OXFORD_APP_ID;

@@ -1,6 +1,6 @@
 import {types} from '../actions/actionTypes'
 import { takeLatest, call, put } from 'redux-saga/effects'
-import { download } from '../helpers/download'
+import { download } from '../lib/helpers/download'
 import {cacheWordAudioAction} from "../actions/cacheWordAudioAction";
 
 export function* cacheWordAudioWatcher() {
