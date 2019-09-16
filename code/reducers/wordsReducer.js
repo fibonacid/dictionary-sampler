@@ -4,11 +4,11 @@ import _ from 'lodash'
 export const wordsReducer = (state={}, action) => {
 
    switch(action.type) {
-      case types.GET_WORD:
+      case types.FETCH_WORD:
          return state;
-      case types.GET_WORD_SUCCESS:
+      case types.FETCH_WORD_SUCCESS:
          return digestGetWord(state, action.payload);
-      case types.GET_WORD_ERROR:
+      case types.FETCH_WORD_ERROR:
          return state;
       default:
          return state

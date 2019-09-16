@@ -21,29 +21,27 @@ const lastWordSelector = state => {
    }
 };
 
-export function* getWordWatcher() {
-   const saga = yield takeLatest(types.GET_WORD, getWordSaga)
+export function* fetchWordWatcher() {
+   const saga = yield takeLatest(types.FETCH_WORD, fetchWordSaga)
 }
 
-export function* getWordSaga(action) {
-   const payload = yield call(getWordRequest, action.payload);
+export function* fetchWordSaga(action) {
+   const payload = yield call(fetchWordRequest, action.payload);
    if (payload.status === 200) {
       // Digest response
-      yield put({type: types.GET_WORD_SUCCESS, payload: digestResponse(payload)});
+      yield put({type: types.FETCH_WORD_SUCCESS, payload: digestResponse(payload)});
 
       const word = yield select(lastWordSelector);
-
-      yield call(word => { console.log(`getWordSaga: ${word}`) }, word);
 
       // Cache audio file
       yield put({type: types.CACHE_WORD_AUDIO, payload: word});
 
    } else {
-      yield put({type: types.GET_WORD_ERROR })
+      yield put({type: types.FETCH_WORD_ERROR })
    }
 }
 
-export function getWordRequest({word, params}) {
+export function fetchWordRequest({word, params}) {
    let { lang, filters } = params;
    let url = `https://od-api.oxforddictionaries.com/api/v2/entries/${lang}/${word}`;
    url += getFilterParams(filters);

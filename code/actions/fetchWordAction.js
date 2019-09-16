@@ -9,9 +9,9 @@ const defaultParams = {
    ]
 };
 
-export function getWordAction(word, params={}) {
+export function fetchWordAction(word, params={}) {
    return {
-      type: types.GET_WORD,
+      type: types.FETCH_WORD,
       payload: {
          word,
          params: {...defaultParams, ...params}
