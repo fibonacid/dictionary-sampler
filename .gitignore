@@ -17,3 +17,6 @@ code/cache/*
 
 # Logs
 *.log
+
+# Environment
+.env
