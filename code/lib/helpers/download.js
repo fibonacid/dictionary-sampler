@@ -24,7 +24,7 @@ export const download = async (url, dest) => {
    response.data.pipe(writer);
 
    return new Promise((resolve, reject) => {
-      writer.on('finish', resolve);
+      writer.on('finish', resolve.bind(null, dest));
       writer.on('error', reject);
    });
 };
