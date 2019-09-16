@@ -1,17 +1,15 @@
 import {store} from './store';
 import {fetchWordAction} from './actions/fetchWordAction'
-
-const maxAPI = __non_webpack_require__("max-api");
-
+import { maxApi } from "./lib/config/maxApi";
 
 var path = require('path');
 global.appRoot = path.resolve(process.cwd(), "..");
 
-console.log(global.appRoot);
+//console.log(global.appRoot);
 
 const handleStateChange = () => {
    let state = store.getState();
-   maxAPI.outlet(state)
+   maxApi.outlet(state)
 }
 // Bind change in state to function
 store.subscribe(handleStateChange);
@@ -20,11 +18,11 @@ store.subscribe(handleStateChange);
 //store.dispatch(getWordAction('hello'));
 
 const handlers = {
-   get_word: (word) => {
+   fetch_word: (word) => {
       store.dispatch(fetchWordAction(word));
    }
 };
 
 /** */
-maxAPI.addHandlers(handlers);
+maxApi.addHandlers(handlers);
 

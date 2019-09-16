@@ -2,13 +2,16 @@ import {createStore, applyMiddleware} from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import rootSaga from './sagas/rootSaga'
 import {rootReducer} from './reducers/rootReducer'
+import { maxApi } from "./lib/config/maxApi";
 
 const sagaMiddleware = createSagaMiddleware();
 
 function logAction() {
    return next => action => {
-      console.log(`dispatching action => ${action.type}`);
-      console.log(`${action.payload || action.error}`);
+      const message =
+          `dispatching action => ${action.type}\n${action.payload || action.error}`;
+      console.log(message);
+      maxApi.post(message);
       return next(action)
    }
 }

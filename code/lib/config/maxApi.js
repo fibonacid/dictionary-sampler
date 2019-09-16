@@ -1,0 +1,1 @@
+export const maxApi = __non_webpack_require__("max-api");
