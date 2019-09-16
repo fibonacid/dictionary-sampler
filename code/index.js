@@ -1,5 +1,5 @@
 import {store} from './store';
-import {getWordAction} from './actions/getWordAction'
+import {fetchWordAction} from './actions/fetchWordAction'
 
 const maxAPI = __non_webpack_require__("max-api");
 
@@ -21,7 +21,7 @@ store.subscribe(handleStateChange);
 
 const handlers = {
    get_word: (word) => {
-      store.dispatch(getWordAction(word));
+      store.dispatch(fetchWordAction(word));
    }
 };
 
