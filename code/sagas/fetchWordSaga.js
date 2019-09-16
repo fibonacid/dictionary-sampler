@@ -1,5 +1,6 @@
 import {types} from '../actions/actionTypes'
 import { axiosConfig } from "../lib/helpers/axiosConfig";
+import {cacheWordAudioAction} from "../actions/cacheWordAudioAction";
 import {
    takeLatest,
    call,
@@ -31,10 +32,12 @@ export function* fetchWordSaga(action) {
    try {
       const response = yield call(fetchWordRequest, action.payload);
       if (typeof response !== "undefined") {
+         const word = digestData(response.data);
          yield put({
             type: types.FETCH_WORD_SUCCESS,
-            payload: digestData(response.data)
-         })
+            payload: word
+         });
+         yield put(cacheWordAudioAction(word))
       } else {
          throw new Error("response is undefined");
       }
