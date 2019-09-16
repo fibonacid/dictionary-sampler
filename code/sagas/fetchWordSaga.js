@@ -1,4 +1,5 @@
 import {types} from '../actions/actionTypes'
+import { axiosConfig } from "../lib/helpers/axiosConfig";
 import {
    takeLatest,
    call,
@@ -6,27 +7,12 @@ import {
    cancel,
    take
 } from 'redux-saga/effects'
-import axios from "axios";
-import {initAxios} from "../lib/helpers/initAxios";
-import {cacheWordAudioAction} from "../actions/cacheWordAudioAction";
 
-initAxios(axios);
-
-const lastWordSelector = state => {
-   const { words } = state;
-   if (words && words.index && words.data) {
-      // If index is an array
-      if (Array.isArray(words.index)) {
-         // Get id of last item in the array
-         const id = words.index[words.index.length - 1];
-         // If id is a string
-         if (typeof id === "string") {
-            return words.data[`${id}`];
-         }
-      }
-   }
-};
-
+/**
+ * FETCH WORD WATCHER
+ * ==================
+ * @returns {IterableIterator<any>}
+ */
 export function* fetchWordWatcher() {
    const saga = yield takeLatest(types.FETCH_WORD, fetchWordSaga);
    // Listen if any there is any failure
@@ -35,6 +21,12 @@ export function* fetchWordWatcher() {
    yield cancel(saga);
 }
 
+/**
+ * FETCH WORD SAGA
+ * ===============
+ * @param action
+ * @returns {IterableIterator<PutEffect<{payload: *, type: *}>|PutEffect<{type: *, error: *}>|CallEffect>}
+ */
 export function* fetchWordSaga(action) {
    try {
       const { payload } = yield call(fetchWordRequest, action.payload);
@@ -55,12 +47,19 @@ export function* fetchWordSaga(action) {
    }
 }
 
+/**
+ * FETCH WORD REQUEST
+ * ==================
+ * @param word
+ * @param params
+ * @returns {Promise<AxiosResponse<any>>}
+ */
 export function fetchWordRequest({word, params}) {
    let { lang, filters } = params;
    let url = `https://od-api.oxforddictionaries.com/api/v2/entries/${lang}/${word}`;
-   url += getFilterParams(filters);
-   //console.log(url);
-   return axios.get(url)
+   url += `?${getFilterParams(filters)}`;
+   console.log(url);
+   return axiosConfig.get(url)
        .then(response => {
           return response;
        })
@@ -69,6 +68,12 @@ export function fetchWordRequest({word, params}) {
        })
 }
 
+/**
+ * DIGEST RESPONSE
+ * ===============
+ * @param data
+ * @returns {SpeechRecognitionResultList|{language: *, id: *, pronunciations: *}}
+ */
 function digestResponse({data}) {
    // If object is composed as expected
    if (data.results &&
@@ -82,17 +87,18 @@ function digestResponse({data}) {
 
       // Loop through every lexical entry
       lexicalEntries.forEach( entry => {
-         // If theres a registry called pronunciations
+         // If there's a registry called pronunciations
          if (entry.pronunciations &&
             Array.isArray(entry.pronunciations)
          ) {
             // Loop through every pronunciation
-            entry.pronunciations.forEach( p => {
+            entry.pronunciations.forEach( pronunciation => {
+                const { audioFile, phoneticSpelling } = pronunciation;
                // If thers an audio file attached:
-               if (p.audioFile) {
+               if (audioFile && phoneticSpelling) {
                   // Add it to the list
-                  pronunciations[`${p.phoneticSpelling}`] = {
-                     url: p.audioFile
+                  pronunciations[`${phoneticSpelling}`] = {
+                     url: audioFile
                   };
                }
             });
@@ -107,18 +113,40 @@ function digestResponse({data}) {
    return data.results;
 }
 
+/**
+ * GET FILTER PARAMS
+ * =================
+ * @param filters
+ * @returns {string}
+ */
 function getFilterParams(filters) {
-   let params = "";
-   if (filters) {
-      params+="?fields=";
-      filters.forEach((f) => {
-         if (typeof f === "string") {
-            params += f
-            if (f !== [...filters].pop()) {
-               params += "&&"
-            }
-         }
-      })
+   if (!filters) {
+       return;
    }
-   return params;
+  let params = "fields=";
+  filters.forEach((filter) => {
+     if (typeof filter === "string") {
+        params += filter;
+        if (filter !== [...filters].pop()) {
+           params += "%26%26"
+        }
+     }
+  });
+  return params;
 }
+
+/*
+const lastWordSelector = state => {
+   const { words } = state;
+   if (words && words.index && words.data) {
+      // If index is an array
+      if (Array.isArray(words.index)) {
+         // Get id of last item in the array
+         const id = words.index[words.index.length - 1];
+         // If id is a string
+         if (typeof id === "string") {
+            return words.data[`${id}`];
+         }
+      }
+   }
+};*/
