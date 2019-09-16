@@ -1,16 +1,19 @@
-# Ignore node
+# Node
 code/node_modules
 
-# Ignore jetbrains
+# Jetbrains IDE
 .idea
 
-# Ignore max
+# Max Project
 *.maxproj
 
-# Ignore webpack
-code/dist/bundle.js
+# Webpack
+code/dist/*
+!code/dist/.gitkeep
 
-# Ignore cache files
+# Cache files
 code/cache/*
 !code/cache/.gitkeep
 
+# Logs
+*.log
