@@ -1,5 +1,11 @@
 import {types} from '../actions/actionTypes'
-import { takeLatest, call, put, select } from 'redux-saga/effects'
+import {
+   takeLatest,
+   call,
+   put,
+   cancel,
+   take
+} from 'redux-saga/effects'
 import axios from "axios";
 import {initAxios} from "../lib/helpers/initAxios";
 import {cacheWordAudioAction} from "../actions/cacheWordAudioAction";
@@ -22,22 +28,30 @@ const lastWordSelector = state => {
 };
 
 export function* fetchWordWatcher() {
-   const saga = yield takeLatest(types.FETCH_WORD, fetchWordSaga)
+   const saga = yield takeLatest(types.FETCH_WORD, fetchWordSaga);
+   // Listen if any there is any failure
+   const failure = yield take(types.FETCH_WORD_ERROR);
+   // cancel saga if a failure as happened
+   yield cancel(saga);
 }
 
 export function* fetchWordSaga(action) {
-   const payload = yield call(fetchWordRequest, action.payload);
-   if (payload.status === 200) {
-      // Digest response
-      yield put({type: types.FETCH_WORD_SUCCESS, payload: digestResponse(payload)});
-
-      const word = yield select(lastWordSelector);
-
-      // Cache audio file
-      yield put({type: types.CACHE_WORD_AUDIO, payload: word});
-
-   } else {
-      yield put({type: types.FETCH_WORD_ERROR })
+   try {
+      const { payload } = yield call(fetchWordRequest, action.payload);
+      if (typeof payload !== "undefined") {
+         yield put({
+            type: types.FETCH_WORD_SUCCESS,
+            payload: digestResponse(payload)
+         })
+      } else {
+         throw new Error("payload is undefined");
+      }
+   }
+   catch(error) {
+      yield put({
+         type: types.FETCH_WORD_ERROR,
+         error: error.message
+      })
    }
 }
 
@@ -45,8 +59,14 @@ export function fetchWordRequest({word, params}) {
    let { lang, filters } = params;
    let url = `https://od-api.oxforddictionaries.com/api/v2/entries/${lang}/${word}`;
    url += getFilterParams(filters);
+   //console.log(url);
    return axios.get(url)
-      .catch((error)=>(error))
+       .then(response => {
+          return response;
+       })
+       .catch(error => {
+          throw error
+       })
 }
 
 function digestResponse({data}) {
