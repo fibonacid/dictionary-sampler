@@ -8,7 +8,7 @@ const sagaMiddleware = createSagaMiddleware();
 function logAction() {
    return next => action => {
       console.log(`dispatching action => ${action.type}`);
-      console.log(`payload: ${action.payload}`);
+      console.log(`${action.payload || action.error}`);
       return next(action)
    }
 }
