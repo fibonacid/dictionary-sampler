@@ -17,7 +17,7 @@ export function* cacheWordAudioSaga(action) {
    }
 }
 
-function getUrls(payload) {
+/*function getUrls(payload) {
    const { pronunciations } = payload;
    let urls = [];
    if (pronunciations) {
@@ -27,4 +27,4 @@ function getUrls(payload) {
       });
    }
    return urls;
-}
+}*/
