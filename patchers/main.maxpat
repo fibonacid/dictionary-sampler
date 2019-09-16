@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 0,
-			"revision" : 5,
+			"revision" : 8,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -38,6 +38,43 @@
 		"style" : "",
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-12",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 267.0, 116.0, 66.0, 22.0 ],
+					"presentation_linecount" : 3,
+					"text" : "npm install"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-10",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 226.0, 116.0, 31.0, 22.0 ],
+					"text" : "stop"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-9",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 186.0, 116.0, 32.0, 22.0 ],
+					"text" : "start"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"id" : "obj-5",
 					"maxclass" : "dict.view",
@@ -80,18 +117,6 @@
 			}
 , 			{
 				"box" : 				{
-					"id" : "obj-7",
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 139.0, 127.0, 137.0, 22.0 ],
-					"text" : "script npm install dotenv"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"id" : "obj-20",
 					"maxclass" : "newobj",
 					"numinlets" : 2,
@@ -125,11 +150,11 @@
 					"patching_rect" : [ 63.0, 27.0, 24.0, 24.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_type" : 2,
 							"parameter_longname" : "button",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "button",
-							"parameter_enum" : [ "off", "on" ]
+							"parameter_enum" : [ "off", "on" ],
+							"parameter_type" : 2
 						}
 
 					}
@@ -156,25 +181,13 @@
 			}
 , 			{
 				"box" : 				{
-					"id" : "obj-6",
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 139.0, 193.0, 63.0, 22.0 ],
-					"text" : "script stop"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"id" : "obj-4",
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 63.0, 193.0, 64.0, 22.0 ],
-					"text" : "script start"
+					"patching_rect" : [ 186.0, 163.0, 54.0, 22.0 ],
+					"text" : "script $1"
 				}
 
 			}
@@ -193,7 +206,7 @@
 					"numoutlets" : 1,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 259.0, 169.0, 400.0, 220.0 ],
+					"patching_rect" : [ 320.0, 169.0, 400.0, 220.0 ],
 					"viewvisibility" : 1
 				}
 
@@ -201,12 +214,11 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-1",
-					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 63.0, 234.0, 170.0, 35.0 ],
+					"patching_rect" : [ 63.0, 234.0, 248.0, 22.0 ],
 					"saved_object_attributes" : 					{
 						"autostart" : 1,
 						"defer" : 0,
@@ -215,7 +227,7 @@
 						"watch" : 1
 					}
 ,
-					"text" : "node.script max_interface.js @autostart 1 @watch 1"
+					"text" : "node.script bundle.js @autostart 1 @watch 1"
 				}
 
 			}
@@ -223,7 +235,7 @@
 		"lines" : [ 			{
 				"patchline" : 				{
 					"destination" : [ "obj-2", 0 ],
-					"midpoints" : [ 223.5, 287.0, 248.5, 287.0, 248.5, 174.0, 268.5, 174.0 ],
+					"midpoints" : [ 301.5, 287.0, 284.5, 287.0, 284.5, 157.0, 329.5, 157.0 ],
 					"source" : [ "obj-1", 1 ]
 				}
 
@@ -246,8 +258,22 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-4", 0 ],
+					"source" : [ "obj-10", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-20", 0 ],
 					"source" : [ "obj-11", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-4", 0 ],
+					"source" : [ "obj-12", 0 ]
 				}
 
 			}
@@ -288,15 +314,8 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-1", 0 ],
-					"source" : [ "obj-6", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-1", 0 ],
-					"source" : [ "obj-7", 0 ]
+					"destination" : [ "obj-4", 0 ],
+					"source" : [ "obj-9", 0 ]
 				}
 
 			}
@@ -310,8 +329,8 @@
 		}
 ,
 		"dependency_cache" : [ 			{
-				"name" : "max_interface.js",
-				"bootpath" : "~/Documents/Max 8/Projects/lang-sampler/code/dist",
+				"name" : "bundle.js",
+				"bootpath" : "~/Developer/Max 8/Projects/lang-sampler/code/dist",
 				"patcherrelativepath" : "../code/dist",
 				"type" : "TEXT",
 				"implicit" : 1
