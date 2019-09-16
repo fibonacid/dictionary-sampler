@@ -29,20 +29,20 @@ export function* fetchWordWatcher() {
  */
 export function* fetchWordSaga(action) {
    try {
-      const { payload } = yield call(fetchWordRequest, action.payload);
-      if (typeof payload !== "undefined") {
+      const response = yield call(fetchWordRequest, action.payload);
+      if (typeof response !== "undefined") {
          yield put({
             type: types.FETCH_WORD_SUCCESS,
-            payload: digestResponse(payload)
+            payload: digestData(response.data)
          })
       } else {
-         throw new Error("payload is undefined");
+         throw new Error("response is undefined");
       }
    }
    catch(error) {
       yield put({
          type: types.FETCH_WORD_ERROR,
-         error: error.message
+         error: error.stack
       })
    }
 }
@@ -57,8 +57,8 @@ export function* fetchWordSaga(action) {
 export function fetchWordRequest({word, params}) {
    let { lang, filters } = params;
    let url = `https://od-api.oxforddictionaries.com/api/v2/entries/${lang}/${word}`;
-   url += `?${getFilterParams(filters)}`;
-   console.log(url);
+   //url += `?${getFilterParams(filters)}`;
+   //console.log(url);
    return axiosConfig.get(url)
        .then(response => {
           return response;
@@ -74,12 +74,9 @@ export function fetchWordRequest({word, params}) {
  * @param data
  * @returns {SpeechRecognitionResultList|{language: *, id: *, pronunciations: *}}
  */
-function digestResponse({data}) {
+function digestData(data) {
    // If object is composed as expected
-   if (data.results &&
-       Array.isArray(data.results) &&
-       data.results.length > 0
-   ) {
+   if (data && data.results && data.results.length > 0) {
       // Retrieve word
       const word = data.results[0];
       const { id, language, lexicalEntries } = word;
