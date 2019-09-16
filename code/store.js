@@ -21,4 +21,4 @@ export const store = createStore(
    applyMiddleware(logAction, sagaMiddleware)
 );
 
-sagaMiddleware.run(rootSaga)
+sagaMiddleware.run(rootSaga);
