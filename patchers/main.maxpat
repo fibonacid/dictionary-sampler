@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 436.0, 105.0, 480.0, 661.0 ],
+		"rect" : [ 743.0, 79.0, 585.0, 630.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -45,7 +45,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 267.0, 116.0, 66.0, 22.0 ],
-					"presentation_linecount" : 3,
 					"text" : "npm install"
 				}
 
@@ -93,7 +92,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 130.0, 327.0, 50.0, 62.0 ],
-					"text" : "dictionary u175003354"
+					"text" : "dictionary u261002037"
 				}
 
 			}
@@ -150,11 +149,11 @@
 					"patching_rect" : [ 63.0, 27.0, 24.0, 24.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
+							"parameter_enum" : [ "off", "on" ],
+							"parameter_type" : 2,
 							"parameter_longname" : "button",
 							"parameter_mmax" : 1,
-							"parameter_shortname" : "button",
-							"parameter_enum" : [ "off", "on" ],
-							"parameter_type" : 2
+							"parameter_shortname" : "button"
 						}
 
 					}
@@ -206,7 +205,7 @@
 					"numoutlets" : 1,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 320.0, 169.0, 400.0, 220.0 ],
+					"patching_rect" : [ 299.0, 167.0, 527.0, 223.0 ],
 					"viewvisibility" : 1
 				}
 
@@ -214,16 +213,15 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-1",
+					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 63.0, 234.0, 248.0, 22.0 ],
+					"patching_rect" : [ 63.0, 236.0, 164.0, 35.0 ],
 					"saved_object_attributes" : 					{
 						"autostart" : 1,
 						"defer" : 0,
-						"node_bin_path" : "",
-						"npm_bin_path" : "",
 						"watch" : 1
 					}
 ,
@@ -235,7 +233,7 @@
 		"lines" : [ 			{
 				"patchline" : 				{
 					"destination" : [ "obj-2", 0 ],
-					"midpoints" : [ 301.5, 287.0, 284.5, 287.0, 284.5, 157.0, 329.5, 157.0 ],
+					"midpoints" : [ 217.5, 287.0, 284.5, 287.0, 284.5, 157.0, 308.5, 157.0 ],
 					"source" : [ "obj-1", 1 ]
 				}
 
