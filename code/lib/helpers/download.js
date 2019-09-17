@@ -1,9 +1,6 @@
-import {initAxios} from './initAxios';
 import axios from 'axios';
 
 const fs = require('fs')
-
-initAxios(axios);
 
 export const download = async (url, dest) => {
 
