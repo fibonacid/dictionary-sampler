@@ -2,6 +2,7 @@ import {types} from '../actions/actionTypes'
 import {takeLatest, call, put, select, take, cancel} from 'redux-saga/effects'
 import uniqueFileName from "unique-filename";
 import {download} from "../lib/helpers/download";
+import {updateWordAction} from "../actions/updateWordAction";
 
 export function* cacheWordAudioWatcher() {
    const saga = yield takeLatest(types.CACHE_WORD_AUDIO, cacheWordAudioSaga);
@@ -13,13 +14,17 @@ export function* cacheWordAudioWatcher() {
 
 export function* cacheWordAudioSaga(action) {
    try {
-      const urls = getUrls(action.payload);
+      const word = action.payload;
+      const urls = getUrls(word);
       const path = yield call(downloadAudio, urls[0]);
       if (typeof path != "undefined") {
          yield put({
             type: types.CACHE_WORD_AUDIO_SUCCESS,
             payload: path
-         })
+         });
+         yield put(updateWordAction(word, {
+            audio_file: path
+         }));
       } else {
          throw new Error("cache file couldn't be generated")
       }

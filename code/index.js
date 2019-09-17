@@ -1,5 +1,5 @@
 import {store} from './store';
-import {addWordAction} from './actions/fetchWordAction'
+import {addWordAction} from './actions/addWordAction'
 import { maxApi } from "./lib/config/maxApi";
 import {searchWordAction} from "./actions/searchWordAction";
 
