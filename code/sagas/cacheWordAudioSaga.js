@@ -11,12 +11,12 @@ export function* cacheWordAudioWatcher() {
 
 export function* cacheWordAudioSaga(action) {
    try {
-      if (typeof action.payload !== "undefined") {
-         const urls = getUrls(action.payload);
-         console.log(JSON.stringify(urls));
-      } else {
-         throw new Error("word is undefined");
-      }
+      const urls = getUrls(action.payload);
+      const { payload } = yield put({
+         type: types.DOWNLOAD_AUDIO_FILE,
+         payload: urls[0]
+      });
+      //console.log(payload)
    }
    catch(error) {
       yield put({
