@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 743.0, 79.0, 585.0, 630.0 ],
+		"rect" : [ 436.0, 105.0, 480.0, 661.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -44,8 +44,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 267.0, 116.0, 66.0, 22.0 ],
-					"text" : "npm install"
+					"patching_rect" : [ 267.0, 116.0, 32.0, 22.0 ],
+					"text" : "yarn"
 				}
 
 			}
@@ -86,13 +86,13 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-8",
-					"linecount" : 4,
+					"linecount" : 2,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 130.0, 327.0, 50.0, 62.0 ],
-					"text" : "dictionary u261002037"
+					"patching_rect" : [ 113.0, 317.0, 96.0, 35.0 ],
+					"text" : "dictionary u852005673"
 				}
 
 			}
@@ -133,8 +133,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 63.0, 163.0, 115.0, 22.0 ],
-					"text" : "prepend fetch_word"
+					"patching_rect" : [ 63.0, 163.0, 125.0, 22.0 ],
+					"text" : "prepend search_word"
 				}
 
 			}
@@ -173,7 +173,7 @@
 					"outlettype" : [ "", "int", "", "" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 63.0, 62.0, 100.0, 50.0 ],
-					"text" : "london",
+					"text" : "spaghetti",
 					"wordwrap" : 0
 				}
 
@@ -185,7 +185,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 186.0, 163.0, 54.0, 22.0 ],
+					"patching_rect" : [ 195.0, 163.0, 54.0, 22.0 ],
 					"text" : "script $1"
 				}
 
@@ -205,7 +205,7 @@
 					"numoutlets" : 1,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 299.0, 167.0, 527.0, 223.0 ],
+					"patching_rect" : [ 299.0, 167.0, 572.0, 222.0 ],
 					"viewvisibility" : 1
 				}
 
