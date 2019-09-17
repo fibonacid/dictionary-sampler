@@ -1,4 +1,5 @@
 import {types} from "../actions/actionTypes";
+import _ from "lodash";
 
 export const cacheReducer = (state={}, action) => {
    switch(action.type) {
@@ -14,5 +15,10 @@ export const cacheReducer = (state={}, action) => {
 };
 
 function digestDownloadWord(prevState, payload) {
-   return prevState;
+   const nextState = [];
+   if (payload) {
+      nextState.push(payload);
+   }
+   const index = _.union([], prevState, nextState);
+   return { index }
 }
