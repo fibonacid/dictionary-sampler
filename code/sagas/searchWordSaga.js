@@ -1,6 +1,6 @@
 import {types} from '../actions/actionTypes'
 import { takeLatest, select, call, put, all } from 'redux-saga/effects'
-import {fetchWordAction} from "../actions/fetchWordAction";
+import {addWordAction} from "../actions/fetchWordAction";
 
 export function* searchWordWatcher() {
     const saga = yield takeLatest(types.SEARCH_WORD, searchWordSaga);
@@ -19,7 +19,7 @@ export function* searchWordSaga(action) {
                 type: types.SEARCH_WORD_NOT_FOUND,
                 payload: action.payload
             });
-            yield put(fetchWordAction(action.payload))
+            yield put(addWordAction(action.payload))
         }
      }
     catch(error) {

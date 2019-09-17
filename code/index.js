@@ -1,5 +1,5 @@
 import {store} from './store';
-import {fetchWordAction} from './actions/fetchWordAction'
+import {addWordAction} from './actions/fetchWordAction'
 import { maxApi } from "./lib/config/maxApi";
 import {searchWordAction} from "./actions/searchWordAction";
 
@@ -20,7 +20,7 @@ store.subscribe(handleStateChange);
 
 const handlers = {
    fetch_word: (word) => {
-      store.dispatch(fetchWordAction(word));
+      store.dispatch(addWordAction(word));
    },
    search_word: word => {
        store.dispatch(searchWordAction(word));

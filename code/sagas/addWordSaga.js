@@ -14,10 +14,10 @@ import {
  * ==================
  * @returns {IterableIterator<any>}
  */
-export function* fetchWordWatcher() {
-   const saga = yield takeLatest(types.FETCH_WORD, fetchWordSaga);
+export function* addWordWatcher() {
+   const saga = yield takeLatest(types.ADD_WORD, addWordSaga);
    // Listen if any there is any failure
-   const failure = yield take(types.FETCH_WORD_ERROR);
+   const failure = yield take(types.ADD_WORD_ERROR);
    // cancel saga if a failure as happened
    yield cancel(saga);
 }
@@ -28,13 +28,13 @@ export function* fetchWordWatcher() {
  * @param action
  * @returns {IterableIterator<PutEffect<{payload: *, type: *}>|PutEffect<{type: *, error: *}>|CallEffect>}
  */
-export function* fetchWordSaga(action) {
+export function* addWordSaga(action) {
    try {
-      const response = yield call(fetchWordRequest, action.payload);
+      const response = yield call(fetchWord, action.payload);
       if (typeof response !== "undefined") {
          const word = digestData(response.data);
          yield put({
-            type: types.FETCH_WORD_SUCCESS,
+            type: types.ADD_WORD_SUCCESS,
             payload: word
          });
          yield put(cacheWordAudioAction(word))
@@ -44,7 +44,7 @@ export function* fetchWordSaga(action) {
    }
    catch(error) {
       yield put({
-         type: types.FETCH_WORD_ERROR,
+         type: types.ADD_WORD_ERROR,
          error: error.message
       })
    }
@@ -57,7 +57,7 @@ export function* fetchWordSaga(action) {
  * @param params
  * @returns {Promise<AxiosResponse<any>>}
  */
-export function fetchWordRequest({word, params}) {
+export function fetchWord({word, params}) {
    let { lang, filters } = params;
    let url = `https://od-api.oxforddictionaries.com/api/v2/entries/${lang}/${word}`;
    //url += `?${getFilterParams(filters)}`;

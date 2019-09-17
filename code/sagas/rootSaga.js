@@ -1,6 +1,6 @@
 import {all} from 'redux-saga/effects'
 import {searchWordWatcher} from "./searchWordSaga";
-import {fetchWordWatcher} from "./fetchWordSaga";
+import {addWordWatcher} from "./addWordSaga";
 import {cacheWordAudioWatcher} from "./cacheWordAudioSaga";
 import {downloadAudioFileWatcher} from "./DownloadAudioSaga";
 
@@ -10,7 +10,7 @@ import {downloadAudioFileWatcher} from "./DownloadAudioSaga";
 export default function* rootSaga() {
    yield all([
       searchWordWatcher(),
-      fetchWordWatcher(),
+      addWordWatcher(),
       cacheWordAudioWatcher(),
    ])
 }
