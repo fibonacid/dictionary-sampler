@@ -1,5 +1,7 @@
 import {types} from '../actions/actionTypes'
 import {takeLatest, call, put, select, take, cancel} from 'redux-saga/effects'
+import uniqueFileName from "unique-filename";
+import {download} from "../lib/helpers/download";
 
 export function* cacheWordAudioWatcher() {
    const saga = yield takeLatest(types.CACHE_WORD_AUDIO, cacheWordAudioSaga);
@@ -12,11 +14,15 @@ export function* cacheWordAudioWatcher() {
 export function* cacheWordAudioSaga(action) {
    try {
       const urls = getUrls(action.payload);
-      const { payload } = yield put({
-         type: types.DOWNLOAD_AUDIO_FILE,
-         payload: urls[0]
-      });
-      //console.log(payload)
+      const path = yield call(downloadAudio, urls[0]);
+      if (typeof path != "undefined") {
+         yield put({
+            type: types.CACHE_WORD_AUDIO_SUCCESS,
+            payload: path
+         })
+      } else {
+         throw new Error("cache file couldn't be generated")
+      }
    }
    catch(error) {
       yield put({
@@ -26,12 +32,21 @@ export function* cacheWordAudioSaga(action) {
    }
 }
 
-const wordSelector = (state, word) => {
-   const { data } = state.words;
-   if (!data || !word) {
-      return;
-   }
-   return data[word];
+function downloadAudio(url) {
+   const path = generateCacheFile();
+   return download(url, path)
+       .then(() => {
+          return path;
+       })
+       .catch(error => {
+          throw error;
+       })
+}
+
+function generateCacheFile() {
+   const dir = `${global.appRoot}/cache`;
+   let filename = uniqueFileName(dir);
+   return filename + ".mp3";
 };
 
 function getUrls(payload) {

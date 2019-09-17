@@ -45,7 +45,7 @@ export function* fetchWordSaga(action) {
    catch(error) {
       yield put({
          type: types.FETCH_WORD_ERROR,
-         error: error.stack
+         error: error.message
       })
    }
 }

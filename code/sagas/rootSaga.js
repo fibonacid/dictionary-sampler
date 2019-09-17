@@ -12,6 +12,5 @@ export default function* rootSaga() {
       searchWordWatcher(),
       fetchWordWatcher(),
       cacheWordAudioWatcher(),
-      downloadAudioFileWatcher()
    ])
 }
