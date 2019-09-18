@@ -5,6 +5,7 @@ import {cacheWordAudioWatcher} from "./cacheWordAudioSaga";
 import {maxObjectOutputWatcher} from "./maxObjectOutputSaga";
 import {searchWordsFromTextWatcher} from "./searchWordsFromTextSaga";
 import {maxConsolePrintWatcher} from "./maxConsolePrintSaga";
+import {logStoreWatcher} from "./logStore";
 
 // notice how we now only export the rootSaga
 // single entry point to start all Sagas at once
@@ -15,6 +16,7 @@ export default function* rootSaga() {
       addWordWatcher(),
       cacheWordAudioWatcher(),
       maxObjectOutputWatcher(),
-      maxConsolePrintWatcher()
+      maxConsolePrintWatcher(),
+      logStoreWatcher()
    ])
 }

@@ -19,7 +19,7 @@ code/cache/*
 !code/cache/.gitkeep
 
 # Logs
-*.log
+logs/*.log
 
 # Environment
 .env

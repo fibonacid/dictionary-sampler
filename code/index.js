@@ -3,6 +3,7 @@ import {addWordAction} from './actions/addWordAction'
 import { maxApi } from "./lib/config/maxApi";
 import {searchWordAction} from "./actions/searchWordAction";
 import {searchWordsFromTextAction} from "./actions/searchWordsFromTextAction";
+import {logStoreAction} from "./actions/logStoreAction";
 
 var path = require('path');
 global.appRoot = path.resolve(process.cwd(), "..");
@@ -26,9 +27,8 @@ const handlers = {
    search_word: word => {
        store.dispatch(searchWordAction(word));
    },
-   get_state: () => {
-      const state = store.getState();
-      maxApi.post(JSON.stringify(state));
+   log_store: () => {
+      store.dispatch(logStoreAction());
    }
 };
 

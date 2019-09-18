@@ -16,5 +16,6 @@ export const types = {
    MAX_CONSOLE_PRINT: "MAX_CONSOLE_PRINT", // todo
    CHANGE_LANGUAGE: "CHANGE_LANGUAGE",
    CLEAR_CACHE: "CLEAR_CACHE", // todo
+   LOG_STORE: "LOG_STORE",
    RESET: "RESET" // todo
 };
