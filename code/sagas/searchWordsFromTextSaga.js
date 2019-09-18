@@ -1,9 +1,9 @@
-import {takeLatest, put, all} from "@redux-saga/core/effects";
+import {takeEvery, put, all} from "@redux-saga/core/effects";
 import {types} from "../actions/actionTypes";
 import {searchWordAction} from "../actions/searchWordAction";
 
 export function* searchWordsFromTextWatcher() {
-    const saga = yield takeLatest(types.SEARCH_WORDS_FROM_TEXT, searchWordsFromTextSaga);
+    yield takeEvery(types.SEARCH_WORDS_FROM_TEXT, searchWordsFromTextSaga);
 }
 
 export function* searchWordsFromTextSaga(action) {
