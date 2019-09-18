@@ -4,6 +4,7 @@ import { maxApi } from "./lib/config/maxApi";
 import {searchWordAction} from "./actions/searchWordAction";
 import {searchWordsFromTextAction} from "./actions/searchWordsFromTextAction";
 import {logStoreAction} from "./actions/logStoreAction";
+import {stopAllAction} from "./actions/stopAllAction";
 
 var path = require('path');
 global.appRoot = path.resolve(process.cwd(), "..");
@@ -29,6 +30,9 @@ const handlers = {
    },
    log_store: () => {
       store.dispatch(logStoreAction());
+   },
+   panic: () => {
+       store.dispatch(stopAllAction());
    }
 };
 
