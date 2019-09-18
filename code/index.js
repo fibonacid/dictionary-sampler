@@ -5,6 +5,7 @@ import {searchWordAction} from "./actions/searchWordAction";
 import {searchWordsFromTextAction} from "./actions/searchWordsFromTextAction";
 import {logStoreAction} from "./actions/logStoreAction";
 import {stopAllAction} from "./actions/stopAllAction";
+import {clearCacheAction} from "./actions/clearCacheAction";
 
 var path = require('path');
 global.appRoot = path.resolve(process.cwd(), "..");
@@ -30,6 +31,9 @@ const handlers = {
    },
    log_store: () => {
       store.dispatch(logStoreAction());
+   },
+   clear_cache: () => {
+      store.dispatch(clearCacheAction());
    },
    panic: () => {
        store.dispatch(stopAllAction());
