@@ -4,8 +4,10 @@ export const baseReducer = (state={}, action) => {
     switch(action.type) {
         case types.CHANGE_LANGUAGE:
             return {
-                ... state,
+                ...state,
                 lang: action.payload
             };
+        default:
+            return state;
     }
 };
