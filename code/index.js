@@ -10,8 +10,8 @@ global.appRoot = path.resolve(process.cwd(), "..");
 
 const handleStateChange = () => {
    let state = store.getState();
-   maxApi.outlet(state)
-}
+   //maxApi.outlet(state)
+};
 // Bind change in state to function
 store.subscribe(handleStateChange);
 
@@ -19,11 +19,12 @@ store.subscribe(handleStateChange);
 //store.dispatch(getWordAction('hello'));
 
 const handlers = {
-   fetch_word: (word) => {
-      store.dispatch(addWordAction(word));
-   },
    search_word: word => {
        store.dispatch(searchWordAction(word));
+   },
+   get_state: () => {
+      const state = store.getState();
+      maxApi.post(JSON.stringify(state));
    }
 };
 
