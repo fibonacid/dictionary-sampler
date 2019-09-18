@@ -1,7 +1,7 @@
 import {types} from '../actions/actionTypes'
 import { call, select, put , fork, take, actionChannel} from 'redux-saga/effects'
 import {addWordAction} from "../actions/addWordAction";
-import {maxApiOutputAction} from "../actions/maxApiOutputAction";
+import {maxObjectOutputAction} from "../actions/maxObjectOutputAction";
 import {selectWord} from "../lib/helpers/common";
 
 export function* searchWordWatcher() {
@@ -23,7 +23,7 @@ export function* searchWordSaga(action) {
                 type: types.SEARCH_WORD_FOUND,
                 payload: word
             });
-            yield put(maxApiOutputAction(word));
+            yield put(maxObjectOutputAction(word));
         } else {
             yield put({
                 type: types.SEARCH_WORD_NOT_FOUND,

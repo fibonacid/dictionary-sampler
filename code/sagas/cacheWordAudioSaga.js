@@ -3,7 +3,7 @@ import {takeLatest, call, put, select, take, cancel, actionChannel} from 'redux-
 import uniqueFileName from "unique-filename";
 import {download} from "../lib/helpers/download";
 import {updateWordAction} from "../actions/updateWordAction";
-import {maxApiOutputAction} from "../actions/maxApiOutputAction";
+import {maxObjectOutputAction} from "../actions/maxObjectOutputAction";
 import {selectWord} from "../lib/helpers/common";
 
 export function* cacheWordAudioWatcher() {
@@ -34,7 +34,7 @@ export function* cacheWordAudioSaga(action) {
             audio_file: path
          }));
          const updated_word = yield select(selectWord, word.id);
-         yield put(maxApiOutputAction(updated_word));
+         yield put(maxObjectOutputAction(updated_word));
       } else {
          throw new Error("cache file couldn't be generated")
       }
