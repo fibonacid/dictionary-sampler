@@ -16,7 +16,7 @@ export function* searchWordSaga(action) {
                 type: types.SEARCH_WORD_FOUND,
                 payload: word
             });
-            yield maxApiOutputAction(word)
+            yield put(maxApiOutputAction(word));
         } else {
             yield put({
                 type: types.SEARCH_WORD_NOT_FOUND,
