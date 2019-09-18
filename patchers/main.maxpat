@@ -92,7 +92,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 113.0, 317.0, 96.0, 35.0 ],
-					"text" : "dictionary u852005673"
+					"text" : "dictionary u768002667"
 				}
 
 			}
@@ -149,11 +149,11 @@
 					"patching_rect" : [ 63.0, 27.0, 24.0, 24.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
+							"parameter_shortname" : "button",
 							"parameter_enum" : [ "off", "on" ],
 							"parameter_type" : 2,
 							"parameter_longname" : "button",
-							"parameter_mmax" : 1,
-							"parameter_shortname" : "button"
+							"parameter_mmax" : 1
 						}
 
 					}
@@ -173,7 +173,7 @@
 					"outlettype" : [ "", "int", "", "" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 63.0, 62.0, 100.0, 50.0 ],
-					"text" : "spaghetti",
+					"text" : "goodbye",
 					"wordwrap" : 0
 				}
 
@@ -205,7 +205,7 @@
 					"numoutlets" : 1,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 299.0, 167.0, 572.0, 222.0 ],
+					"patching_rect" : [ 299.0, 163.0, 668.0, 225.0 ],
 					"viewvisibility" : 1
 				}
 
@@ -222,6 +222,8 @@
 					"saved_object_attributes" : 					{
 						"autostart" : 1,
 						"defer" : 0,
+						"node_bin_path" : "",
+						"npm_bin_path" : "",
 						"watch" : 1
 					}
 ,
