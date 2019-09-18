@@ -3,6 +3,8 @@ import {takeLatest, call, put, select, take, cancel} from 'redux-saga/effects'
 import uniqueFileName from "unique-filename";
 import {download} from "../lib/helpers/download";
 import {updateWordAction} from "../actions/updateWordAction";
+import {maxApiOutputAction} from "../actions/maxApiOutputAction";
+import {selectWord} from "../lib/helpers/common";
 
 export function* cacheWordAudioWatcher() {
    const saga = yield takeLatest(types.CACHE_WORD_AUDIO, cacheWordAudioSaga);
@@ -28,6 +30,8 @@ export function* cacheWordAudioSaga(action) {
          yield put(updateWordAction(word.id, {
             audio_file: path
          }));
+         const updated_word = yield select(selectWord, word.id);
+         yield put(maxApiOutputAction(updated_word));
       } else {
          throw new Error("cache file couldn't be generated")
       }

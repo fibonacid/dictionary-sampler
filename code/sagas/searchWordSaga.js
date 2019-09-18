@@ -1,6 +1,8 @@
 import {types} from '../actions/actionTypes'
 import { takeLatest, select, call, put, all } from 'redux-saga/effects'
 import {addWordAction} from "../actions/addWordAction";
+import {maxApiOutputAction} from "../actions/maxApiOutputAction";
+import {selectWord} from "../lib/helpers/common";
 
 export function* searchWordWatcher() {
     const saga = yield takeLatest(types.SEARCH_WORD, searchWordSaga);
@@ -14,6 +16,7 @@ export function* searchWordSaga(action) {
                 type: types.SEARCH_WORD_FOUND,
                 payload: word
             });
+            yield maxApiOutputAction(word)
         } else {
             yield put({
                 type: types.SEARCH_WORD_NOT_FOUND,
@@ -29,11 +32,3 @@ export function* searchWordSaga(action) {
         })
     }
 }
-
-const selectWord = (state, word) => {
-    const { data } = state.words;
-    if (!data) {
-        return;
-    }
-    return data[word];
-};
