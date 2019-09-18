@@ -1,8 +1,10 @@
 import {types} from '../actions/actionTypes'
-import { call, select, put, take, actionChannel, fork} from 'redux-saga/effects'
+import { call, select, put, take, actionChannel, fork, delay} from 'redux-saga/effects'
 import {addWordAction} from "../actions/addWordAction";
 import {maxObjectOutputAction} from "../actions/maxObjectOutputAction";
 import {selectWord} from "../lib/helpers/common";
+
+const MINIMUM_WAIT = 50; // ms
 
 export function* searchWordWatcher() {
     // 1- Create a channel for request actions
@@ -16,7 +18,9 @@ export function* searchWordWatcher() {
     while (true) {
         // 2- take from the channel
         const action = yield take(requestChan);
-        // 3- Note that we're using a blocking call
+        // 3- Wait some millis
+        yield delay(MINIMUM_WAIT);
+        // 4- Note that we're using a blocking call
         yield call(searchWordSaga, action);
     }
 }
