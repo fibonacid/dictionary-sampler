@@ -15,10 +15,10 @@ export const cacheReducer = (state={}, action) => {
 };
 
 function digestDownloadWord(prevState, payload) {
-   const nextState = [];
-   if (payload) {
-      nextState.push(payload);
-   }
-   const index = _.union([], prevState, nextState);
+   const nextState = {
+      index: []
+   };
+   nextState.index.push(payload);
+   const index = _.union([], prevState.index, nextState.index);
    return { index }
 }
