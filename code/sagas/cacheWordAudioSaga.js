@@ -33,8 +33,8 @@ export function* cacheWordAudioSaga(action) {
          yield put(updateWordAction(word.id, {
             audio_file: path
          }));
-         const updated_word = yield select(selectWord, word.id);
-         yield put(maxObjectOutputAction(updated_word));
+         const {audio_file} = yield select(selectWord, word.id);
+         yield put(maxObjectOutputAction(audio_file));
       } else {
          throw new Error("cache file couldn't be generated")
       }

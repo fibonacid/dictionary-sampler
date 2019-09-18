@@ -23,7 +23,9 @@ export function* searchWordSaga(action) {
                 type: types.SEARCH_WORD_FOUND,
                 payload: word
             });
-            yield put(maxObjectOutputAction(word));
+            if (word.audio_file) {
+                yield put(maxObjectOutputAction(word.audio_file));
+            }
         } else {
             yield put({
                 type: types.SEARCH_WORD_NOT_FOUND,
