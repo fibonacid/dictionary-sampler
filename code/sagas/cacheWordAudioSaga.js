@@ -16,6 +16,9 @@ export function* cacheWordAudioSaga(action) {
    try {
       const word = action.payload;
       const urls = getUrls(word);
+      /*if (urls.length === 0) {
+         throw new Error(`no audio files found for ${word.id}`);
+      }*/
       const path = yield call(downloadAudio, urls[0]);
       if (typeof path != "undefined") {
          yield put({
