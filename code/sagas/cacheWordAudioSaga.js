@@ -22,7 +22,7 @@ export function* cacheWordAudioSaga(action) {
             type: types.CACHE_WORD_AUDIO_SUCCESS,
             payload: path
          });
-         yield put(updateWordAction(word, {
+         yield put(updateWordAction(word.id, {
             audio_file: path
          }));
       } else {
