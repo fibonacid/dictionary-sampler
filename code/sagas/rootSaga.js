@@ -2,7 +2,7 @@ import {all} from 'redux-saga/effects'
 import {searchWordWatcher} from "./searchWordSaga";
 import {addWordWatcher} from "./addWordSaga";
 import {cacheWordAudioWatcher} from "./cacheWordAudioSaga";
-import {downloadAudioFileWatcher} from "./DownloadAudioSaga";
+import {maxApiOutputWatcher} from "./maxApiOutputSaga";
 
 
 // notice how we now only export the rootSaga
@@ -12,5 +12,6 @@ export default function* rootSaga() {
       searchWordWatcher(),
       addWordWatcher(),
       cacheWordAudioWatcher(),
+      maxApiOutputWatcher()
    ])
 }
