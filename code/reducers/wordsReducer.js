@@ -22,7 +22,7 @@ function digestAddWord(prevState, payload) {
       index: []
    };
    if (payload && payload.id) {
-      nextState.data[`${payload.id}`] = payload;
+      nextState.data[payload.id] = payload;
       nextState.index.push(`${payload.id}`);
    }
    const data = _.merge({}, prevState.data, nextState.data);
@@ -31,5 +31,15 @@ function digestAddWord(prevState, payload) {
 }
 
 function digestUpdateWord(prevState, payload) {
-   return prevState;
+   const nextState = {
+      data: {},
+      index: []
+   };
+   nextState.data[payload.id] = _.assign(nextState.data[payload.id], payload.args);
+
+   console.log(JSON.stringify(payload));
+
+   const data = _.merge({}, prevState.data, nextState.data);
+   const index = _.union([], prevState.index, nextState.index);
+   return { data, index };
 }
