@@ -1,5 +1,5 @@
 import {types} from '../actions/actionTypes'
-import { call, select, put , fork, take, actionChannel} from 'redux-saga/effects'
+import { call, select, put, take, actionChannel, fork} from 'redux-saga/effects'
 import {addWordAction} from "../actions/addWordAction";
 import {maxObjectOutputAction} from "../actions/maxObjectOutputAction";
 import {selectWord} from "../lib/helpers/common";
@@ -7,6 +7,12 @@ import {selectWord} from "../lib/helpers/common";
 export function* searchWordWatcher() {
     // 1- Create a channel for request actions
     const requestChan = yield actionChannel(types.SEARCH_WORD);
+
+    /*yield fork(function* () {
+        yield take(types.STOP_ALL);
+        requestChan.close();
+    });*/
+
     while (true) {
         // 2- take from the channel
         const action = yield take(requestChan);
