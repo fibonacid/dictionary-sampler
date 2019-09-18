@@ -1,5 +1,5 @@
 import {types} from '../actions/actionTypes'
-import {takeLatest, call, put, select, take, cancel} from 'redux-saga/effects'
+import {takeLatest, call, put, select, take, cancel, actionChannel} from 'redux-saga/effects'
 import uniqueFileName from "unique-filename";
 import {download} from "../lib/helpers/download";
 import {updateWordAction} from "../actions/updateWordAction";
@@ -7,11 +7,14 @@ import {maxApiOutputAction} from "../actions/maxApiOutputAction";
 import {selectWord} from "../lib/helpers/common";
 
 export function* cacheWordAudioWatcher() {
-   const saga = yield takeLatest(types.CACHE_WORD_AUDIO, cacheWordAudioSaga);
-   // Listen if any there is any failure
-   const failure = yield take(types.CACHE_WORD_AUDIO_ERROR);
-   // cancel saga if a failure as happened
-   yield cancel(saga);
+   // 1- Create a channel for request actions
+   const requestChan = yield actionChannel(types.CACHE_WORD_AUDIO);
+   while (true) {
+      // 2- take from the channel
+      const action = yield take(requestChan);
+      // 3- Note that we're using a blocking call
+      yield call(cacheWordAudioSaga, action);
+   }
 }
 
 export function* cacheWordAudioSaga(action) {

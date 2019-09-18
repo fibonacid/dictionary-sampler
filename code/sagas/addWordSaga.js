@@ -6,7 +6,7 @@ import {
    call,
    put,
    cancel,
-   take
+   take, actionChannel
 } from 'redux-saga/effects'
 
 /**
@@ -15,11 +15,14 @@ import {
  * @returns {IterableIterator<any>}
  */
 export function* addWordWatcher() {
-   const saga = yield takeLatest(types.ADD_WORD, addWordSaga);
-   // Listen if any there is any failure
-   const failure = yield take(types.ADD_WORD_ERROR);
-   // cancel saga if a failure as happened
-   yield cancel(saga);
+   // 1- Create a channel for request actions
+   const requestChan = yield actionChannel(types.ADD_WORD);
+   while (true) {
+      // 2- take from the channel
+      const action = yield take(requestChan);
+      // 3- Note that we're using a blocking call
+      yield call(addWordSaga, action);
+   }
 }
 
 /**

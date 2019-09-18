@@ -1,11 +1,18 @@
 import {types} from '../actions/actionTypes'
-import { takeLatest, select, call, put, all } from 'redux-saga/effects'
+import { call, select, put , fork, take, actionChannel} from 'redux-saga/effects'
 import {addWordAction} from "../actions/addWordAction";
 import {maxApiOutputAction} from "../actions/maxApiOutputAction";
 import {selectWord} from "../lib/helpers/common";
 
 export function* searchWordWatcher() {
-    const saga = yield takeLatest(types.SEARCH_WORD, searchWordSaga);
+    // 1- Create a channel for request actions
+    const requestChan = yield actionChannel(types.SEARCH_WORD);
+    while (true) {
+        // 2- take from the channel
+        const action = yield take(requestChan);
+        // 3- Note that we're using a blocking call
+        yield call(searchWordSaga, action);
+    }
 }
 
 export function* searchWordSaga(action) {
