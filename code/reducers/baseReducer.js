@@ -13,9 +13,11 @@ export const baseReducer = (state={}, action) => {
 };
 
 function digestChangeSrcLang(prevState, payload) {
-    return prevState;
+    const newState = { src_lang: payload };
+    return _.merge({}, prevState, newState);
 }
 
 function digestChangeDestLang(prevState, payload) {
-    return prevState;
+    const newState = { dest_lang: payload };
+    return _.merge({}, prevState, newState);
 }
