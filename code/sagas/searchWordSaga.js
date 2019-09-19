@@ -3,6 +3,7 @@ import { call, select, put, take, actionChannel, fork, delay} from 'redux-saga/e
 import {addWordAction} from "../actions/addWordAction";
 import {maxObjectOutputAction} from "../actions/maxObjectOutputAction";
 import {selectWord} from "../lib/helpers/common";
+import {OXFORD_API} from "../lib/config/apiConstants";
 
 const MINIMUM_WAIT = 50; // ms
 
@@ -41,7 +42,10 @@ export function* searchWordSaga(action) {
                 type: types.SEARCH_WORD_NOT_FOUND,
                 payload: action.payload
             });
-            yield put(addWordAction(action.payload))
+            const { src_lang } = yield select(state => state.base);
+            yield put(addWordAction(action.payload, {
+                lang: src_lang
+            }))
         }
      }
     catch(error) {

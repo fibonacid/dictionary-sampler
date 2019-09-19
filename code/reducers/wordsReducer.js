@@ -1,7 +1,12 @@
 import {types} from "../actions/actionTypes";
-import _ from 'lodash'
+import _ from 'lodash';
 
-export const wordsReducer = (state={}, action) => {
+const initialState = {
+   data: {},
+   index: []
+};
+
+export const wordsReducer = (state=initialState, action) => {
    switch(action.type) {
       case types.ADD_WORD:
          return state;

@@ -1,5 +1,6 @@
 import {types} from './actionTypes'
 import {OXFORD_API} from "../lib/config/apiConstants";
+import _ from "lodash"
 
 const defaultParams = {
    lang: "en-us",
@@ -14,7 +15,7 @@ export function addWordAction(word, params={}) {
       type: types.ADD_WORD,
       payload: {
          word,
-         params: {...defaultParams, ...params}
+         params: _.merge({}, defaultParams, params)
       },
    }
 };

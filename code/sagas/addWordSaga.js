@@ -2,12 +2,13 @@ import {types} from '../actions/actionTypes'
 import { axiosConfig } from "../lib/helpers/axiosConfig";
 import {cacheWordAudioAction} from "../actions/cacheWordAudioAction";
 import {
-   takeLatest,
    call,
    put,
-   cancel,
-   take, actionChannel
+   select,
+   take,
+   actionChannel
 } from 'redux-saga/effects'
+import {OXFORD_API} from "../lib/config/apiConstants";
 
 /**
  * FETCH WORD WATCHER
