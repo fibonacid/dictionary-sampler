@@ -8,19 +8,23 @@ import {maxConsolePrintWatcher} from "./maxConsolePrintSaga";
 import {logStoreWatcher} from "./logStore";
 import {stopAllWatcher} from "./stopAllSaga";
 import {clearCacheWatcher} from "./clearCacheSaga";
+import {changeSrcLangWatcher} from "./changeSrcLangSaga";
+import {changeDestLangWatcher} from "./changeDestLangSaga";
 
 // notice how we now only export the rootSaga
 // single entry point to start all Sagas at once
 export default function* rootSaga() {
    yield all([
-      searchWordsFromTextWatcher(),
-      searchWordWatcher(),
       addWordWatcher(),
       cacheWordAudioWatcher(),
+      changeSrcLangWatcher(),
+      changeDestLangWatcher(),
+      clearCacheWatcher(),
+      logStoreWatcher(),
       maxObjectOutputWatcher(),
       maxConsolePrintWatcher(),
-      logStoreWatcher(),
+      searchWordsFromTextWatcher(),
+      searchWordWatcher(),
       stopAllWatcher(),
-      clearCacheWatcher()
    ])
 }
