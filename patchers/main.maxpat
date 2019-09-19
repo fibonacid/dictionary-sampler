@@ -39,6 +39,42 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-58",
+					"maxclass" : "number",
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "bang" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 123.0, 64.5, 50.0, 22.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-59",
+					"maxclass" : "toggle",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "int" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 77.0, 64.5, 24.0, 24.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-60",
+					"maxclass" : "newobj",
+					"numinlets" : 4,
+					"numoutlets" : 1,
+					"outlettype" : [ "int" ],
+					"patching_rect" : [ 77.0, 101.5, 65.0, 22.0 ],
+					"text" : "tempo 120"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"fontface" : 0,
 					"fontname" : "Monaco",
 					"fontsize" : 13.0,
@@ -88,7 +124,7 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-49",
-					"items" : [ "en-gb", ",", "en-us", ",", "es", ",", "de" ],
+					"items" : [ "EN_US", ",", "EN_GB", ",", "ES", ",", "DE" ],
 					"maxclass" : "chooser",
 					"multiselect" : 0,
 					"numinlets" : 1,
@@ -106,7 +142,7 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-43",
-					"items" : [ "en-gb", ",", "en-us", ",", "es", ",", "de" ],
+					"items" : [ "EN_US", ",", "EN_GB", ",", "ES", ",", "DE" ],
 					"maxclass" : "chooser",
 					"multiselect" : 0,
 					"numinlets" : 1,
@@ -254,7 +290,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 77.0, 146.0, 24.0, 24.0 ]
+					"patching_rect" : [ 77.0, 130.5, 24.0, 24.0 ]
 				}
 
 			}
@@ -377,7 +413,7 @@
 					"patching_rect" : [ 350.0, 153.0, 199.0, 23.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 66.0, 101.0, 219.0, 29.0 ],
-					"text" : "hello goodbye  how are you",
+					"text" : "shit sheet shot sure shore",
 					"wordwrap" : 0
 				}
 
@@ -563,8 +599,8 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "int", "", "" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 77.0, 185.0, 100.0, 50.0 ],
-					"text" : "kiss",
+					"patching_rect" : [ 77.0, 169.5, 100.0, 50.0 ],
+					"text" : "cow call ",
 					"wordwrap" : 0
 				}
 
@@ -845,8 +881,29 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-60", 3 ],
+					"source" : [ "obj-58", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-60", 0 ],
+					"source" : [ "obj-59", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-7", 0 ],
 					"source" : [ "obj-6", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-33", 0 ],
+					"source" : [ "obj-60", 0 ]
 				}
 
 			}
