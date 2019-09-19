@@ -13,5 +13,11 @@ export const OXFORD_API = {
       REGISTERS: "registers",
       TRANSLATIONS: "translations",
       ANTONYMS: "antonyms"
+   },
+   LANGUAGES: {
+      EN_GB: "en-gb",
+      EN_US: "en-us",
+      ES: "es",
+      DE: "de"
    }
-}
+};
