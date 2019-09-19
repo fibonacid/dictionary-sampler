@@ -9,8 +9,7 @@ const sagaMiddleware = createSagaMiddleware();
 function logAction() {
    return next => action => {
       const message =
-          `${action.type} => \t${action.payload || action.error}`;
-      console.log(message);
+          `${action.type} => \t${JSON.stringify(action.payload) || action.error}`;
       maxApi.post(message);
       return next(action)
    }
