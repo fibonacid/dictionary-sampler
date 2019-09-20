@@ -1,7 +1,10 @@
 import {types} from "./actionTypes";
 import {SEARCH_STATUS} from "../lib/config/constants";
 
-export const addSearchAction = (query) => ({
+export const addSearchAction = (id) => ({
     type: types.ADD_SEARCH,
-    payload: query
+    payload: {
+        id,
+        status: SEARCH_STATUS.QUEUED
+    }
 });
