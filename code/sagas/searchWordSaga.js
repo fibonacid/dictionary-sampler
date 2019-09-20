@@ -3,19 +3,13 @@ import { call, select, put, take, actionChannel, fork, delay} from 'redux-saga/e
 import {addWordAction} from "../actions/addWordAction";
 import {maxObjectOutputAction} from "../actions/maxObjectOutputAction";
 import {selectWord} from "../lib/helpers/common";
-import {OXFORD_API} from "../lib/config/apiConstants";
+import {addSearchAction} from "../actions/addSearchAction";
 
 const MINIMUM_WAIT = 50; // ms
 
 export function* searchWordWatcher() {
     // 1- Create a channel for request actions
     const requestChan = yield actionChannel(types.SEARCH_WORD);
-
-    /*yield fork(function* () {
-        yield take(types.STOP_ALL);
-        requestChan.close();
-    });*/
-
     while (true) {
         // 2- take from the channel
         const action = yield take(requestChan);
@@ -28,6 +22,7 @@ export function* searchWordWatcher() {
 
 export function* searchWordSaga(action) {
     try {
+        yield put(addSearchAction(action.payload));
         const word = yield select(selectWord, action.payload);
         if (typeof word !== "undefined") {
             yield put({
