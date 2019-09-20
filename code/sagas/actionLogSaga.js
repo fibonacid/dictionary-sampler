@@ -5,7 +5,7 @@ import {maxApi} from "../lib/config/maxApi";
 export function* actionLogWatcher() {
     yield takeEvery('*', function* logger(action) {
         const postLevel = getPostLevelFromActionType(action.type);
-        const message = action.type;
+        const message = `${action.type} ${action.payload}`;
         maxApi.post(message, postLevel);
     })
 };

@@ -4,7 +4,9 @@ import uniqueFileName from "unique-filename";
 import {download} from "../lib/helpers/download";
 import {updateWordAction} from "../actions/updateWordAction";
 import {maxObjectOutputAction} from "../actions/maxObjectOutputAction";
-import {selectWord} from "../lib/helpers/common";
+import {selectSearch, selectWord} from "../lib/helpers/common";
+import {updateSearchStatusAction} from "../actions/updateSearchStatusAction";
+import {SEARCH_STATUS} from "../lib/config/constants";
 
 export function* cacheWordAudioWatcher() {
    // 1- Create a channel for request actions
@@ -26,15 +28,20 @@ export function* cacheWordAudioSaga(action) {
       }*/
       const path = yield call(downloadAudio, urls[0]);
       if (typeof path != "undefined") {
+
          yield put({
             type: types.CACHE_WORD_AUDIO_SUCCESS,
             payload: path
          });
+
          yield put(updateWordAction(word.id, {
             audio_file: path
          }));
-         const {audio_file} = yield select(selectWord, word.id);
-         yield put(maxObjectOutputAction(audio_file));
+
+         yield put(updateSearchStatusAction(word.id, SEARCH_STATUS.AVAILABLE));
+
+         yield put(maxObjectOutputAction(path));
+
       } else {
          throw new Error("cache file couldn't be generated")
       }
@@ -43,7 +50,13 @@ export function* cacheWordAudioSaga(action) {
       yield put({
          type: types.CACHE_WORD_AUDIO_ERROR,
          error: error.message
-      })
+      });
+      const search = yield select(selectSearch, action.payload);
+      if (search) {
+         yield put(
+             updateSearchStatusAction(search.id, SEARCH_STATUS.UNAVAILABLE)
+         );
+      }
    }
 }
 

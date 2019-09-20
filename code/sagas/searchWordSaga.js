@@ -2,8 +2,10 @@ import {types} from '../actions/actionTypes'
 import { call, select, put, take, actionChannel, fork, delay} from 'redux-saga/effects'
 import {addWordAction} from "../actions/addWordAction";
 import {maxObjectOutputAction} from "../actions/maxObjectOutputAction";
-import {selectWord} from "../lib/helpers/common";
+import {selectSearch, selectWord} from "../lib/helpers/common";
 import {addSearchAction} from "../actions/addSearchAction";
+import {updateSearchStatusAction} from "../actions/updateSearchStatusAction";
+import {SEARCH_STATUS} from "../lib/config/constants";
 
 const MINIMUM_WAIT = 50; // ms
 
@@ -22,7 +24,7 @@ export function* searchWordWatcher() {
 
 export function* searchWordSaga(action) {
     try {
-        yield put(addSearchAction(action.payload));
+
         const word = yield select(selectWord, action.payload);
         if (typeof word !== "undefined") {
             yield put({
@@ -37,16 +39,27 @@ export function* searchWordSaga(action) {
                 type: types.SEARCH_WORD_NOT_FOUND,
                 payload: action.payload
             });
+
+
+            console.log("searchWordSaga", JSON.stringify(action.payload));
+
+            yield put(addSearchAction(action.payload));
+
             const { src_lang } = yield select(state => state.base);
             yield put(addWordAction(action.payload, {
                 lang: src_lang
-            }))
+            }));
         }
      }
     catch(error) {
         yield put({
             type: types.SEARCH_WORD_ERROR,
             error: error.message
-        })
+        });
+
+        const search_id = select(selectSearch, action.payload);
+        if (search_id) {
+            yield put(updateSearchStatusAction(search_id, SEARCH_STATUS.FAILED))
+        }
     }
 }

@@ -9,6 +9,10 @@ export const selectWord = (state, word) => {
     return data[word];
 };
 
+export const selectSearch = (state, search_id) => {
+    return state.searches[search_id];
+};
+
 export const isValidLang = lang => {
   if (typeof lang !== "string") {
     throw new Error("lang must be a string");

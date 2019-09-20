@@ -9,6 +9,9 @@ import {
    actionChannel
 } from 'redux-saga/effects'
 import {OXFORD_API} from "../lib/config/apiConstants";
+import {selectSearch} from "../lib/helpers/common";
+import {updateSearchStatusAction} from "../actions/updateSearchStatusAction";
+import {SEARCH_STATUS} from "../lib/config/constants";
 
 /**
  * FETCH WORD WATCHER
@@ -34,6 +37,9 @@ export function* addWordWatcher() {
  */
 export function* addWordSaga(action) {
    try {
+
+      yield put(updateSearchStatusAction(action.payload.word, SEARCH_STATUS.LOADING));
+
       const response = yield call(fetchWord, action.payload);
       if (typeof response !== "undefined") {
          const word = digestData(response.data);
@@ -41,7 +47,8 @@ export function* addWordSaga(action) {
             type: types.ADD_WORD_SUCCESS,
             payload: word
          });
-         yield put(cacheWordAudioAction(word))
+         yield put(cacheWordAudioAction(word));
+
       } else {
          throw new Error("response is undefined");
       }
@@ -50,7 +57,8 @@ export function* addWordSaga(action) {
       yield put({
          type: types.ADD_WORD_ERROR,
          error: error.message
-      })
+      });
+      yield put(updateSearchStatusAction(action.payload.word, SEARCH_STATUS.FAILED));
    }
 }
 

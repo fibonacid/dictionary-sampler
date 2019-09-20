@@ -15,12 +15,18 @@ export const searchesReducer = (state={}, action) => {
 
 function digestAddSearch(prevState, payload) {
     const nextState = {};
-    nextState[payload] = SEARCH_STATUS.QUEUED;
+    nextState[payload] = {
+        id: payload.id,
+        status: payload.status
+    };
     return _.merge({}, prevState, nextState);
 }
 
 function digestUpdateSearchStatus(prevState, payload) {
     const nextState = {};
-    nextState[payload.id] = payload.status;
+    nextState[payload.id] = {
+        id: payload.id,
+        status: payload.status
+    };
     return _.merge({}, prevState, nextState);
 }

@@ -12,18 +12,6 @@ import {clearStoreAction} from "./actions/clearStoreAction";
 var path = require('path');
 global.appRoot = path.resolve(process.cwd(), "..");
 
-//console.log(global.appRoot);
-
-const handleStateChange = () => {
-   let state = store.getState();
-   //maxApi.outlet(state)
-};
-// Bind change in state to function
-store.subscribe(handleStateChange);
-
-// Fire hello message
-//store.dispatch(getWordAction('hello'));
-
 const handlers = {
    change_src_lang: lang => {
       store.dispatch(changeSrcLangAction(lang));

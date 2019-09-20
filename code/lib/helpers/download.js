@@ -4,12 +4,12 @@ const fs = require('fs')
 
 export const download = async (url, dest) => {
 
-   console.log(`... loading from ${url}`);
+   //console.log(`... loading from ${url}`);
 
    const writer = fs.createWriteStream(dest);
 
    writer.on('error', function (err) {
-      console.log(err);
+      throw err
    });
 
    const response = await axios({
