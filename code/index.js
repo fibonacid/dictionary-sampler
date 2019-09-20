@@ -7,6 +7,7 @@ import {stopAllAction} from "./actions/stopAllAction";
 import {clearCacheAction} from "./actions/clearCacheAction";
 import {changeDestLangAction, changeSrcLangAction} from "./actions/changeLanguageAction";
 import {resetAppAction} from "./actions/resetAppAction";
+import {clearStoreAction} from "./actions/clearStoreAction";
 
 var path = require('path');
 global.appRoot = path.resolve(process.cwd(), "..");
@@ -32,6 +33,9 @@ const handlers = {
    },
    clear_cache: () => {
       store.dispatch(clearCacheAction());
+   },
+   clear_store: () => {
+      store.dispatch(clearStoreAction());
    },
    log_store: () => {
       store.dispatch(logStoreAction());
