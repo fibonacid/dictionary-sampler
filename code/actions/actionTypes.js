@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 export const types = {
    SEARCH_WORDS_FROM_TEXT: "SEARCH_WORDS_FROM_TEXT",
    SEARCH_WORD: "SEARCH_WORD",
@@ -25,4 +27,23 @@ export const types = {
    LOG_STORE: "LOG_STORE",
    STOP_ALL: "STOP_ALL", // todo
    RESET_APP: "RESET_APP" // todo
+};
+
+export const successTypes = () => {
+   return _.pick(types, [
+      "ADD_WORD_SUCCESS",
+      "CACHE_WORD_AUDIO_SUCCESS",
+      "CHANGE_SRC_LANG_SUCCESS",
+      "CHANGE_DEST_LANG_SUCCESS"
+   ]);
+};
+
+export const errorTypes = () => {
+   return _.pick(types, [
+      "SEARCH_WORD_ERROR",
+      "ADD_WORD_ERROR",
+      "CACHE_WORD_AUDIO_ERROR",
+      "CHANGE_SRC_LANG_ERROR",
+      "CHANGE_SRC_DEST_ERROR"
+   ]);
 };
