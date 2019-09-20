@@ -4,7 +4,7 @@ import {OXFORD_API} from "../lib/config/apiConstants";
 
 const initialState = {
     src_lang: OXFORD_API.LANGUAGES.EN_US,
-    dest_lang: OXFORD_API.LANGUAGES.EN_US,
+    dest_lang: OXFORD_API.LANGUAGES.EN_US
 };
 
 export const baseReducer = (state=initialState, action) => {
@@ -14,7 +14,7 @@ export const baseReducer = (state=initialState, action) => {
         case types.CHANGE_DEST_LANG_SUCCESS:
             return digestChangeDestLang(state, action.payload);
         default:
-            return state;
+            return state
     }
 };
 
