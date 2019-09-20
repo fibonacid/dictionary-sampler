@@ -1,5 +1,4 @@
 import {store} from './store';
-import {addWordAction} from './actions/addWordAction'
 import { maxApi } from "./lib/config/maxApi";
 import {searchWordAction} from "./actions/searchWordAction";
 import {searchWordsFromTextAction} from "./actions/searchWordsFromTextAction";
@@ -7,6 +6,7 @@ import {logStoreAction} from "./actions/logStoreAction";
 import {stopAllAction} from "./actions/stopAllAction";
 import {clearCacheAction} from "./actions/clearCacheAction";
 import {changeDestLangAction, changeSrcLangAction} from "./actions/changeLanguageAction";
+import {resetAppAction} from "./actions/resetAppAction";
 
 var path = require('path');
 global.appRoot = path.resolve(process.cwd(), "..");
@@ -38,6 +38,9 @@ const handlers = {
    },
    panic: () => {
        store.dispatch(stopAllAction());
+   },
+   reset_app: () => {
+      store.dispatch(resetAppAction());
    },
    search_text: text => {
       store.dispatch(searchWordsFromTextAction(text))

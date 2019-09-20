@@ -10,6 +10,7 @@ import {stopAllWatcher} from "./stopAllSaga";
 import {clearCacheWatcher} from "./clearCacheSaga";
 import {changeSrcLangWatcher} from "./changeSrcLangSaga";
 import {changeDestLangWatcher} from "./changeDestLangSaga";
+import {resetAppWatcher} from "./resetAppSaga";
 
 // notice how we now only export the rootSaga
 // single entry point to start all Sagas at once
@@ -23,6 +24,7 @@ export default function* rootSaga() {
       logStoreWatcher(),
       maxObjectOutputWatcher(),
       maxConsolePrintWatcher(),
+      resetAppWatcher(),
       searchWordsFromTextWatcher(),
       searchWordWatcher(),
       stopAllWatcher(),
