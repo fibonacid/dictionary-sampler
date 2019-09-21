@@ -6,6 +6,7 @@ import {selectSearch, selectWord} from "../lib/helpers/common";
 import {addSearchAction} from "../actions/addSearchAction";
 import {updateSearchStatusAction} from "../actions/updateSearchStatusAction";
 import {SEARCH_STATUS} from "../lib/config/constants";
+import {cacheWordAudioAction} from "../actions/cacheWordAudioAction";
 
 const MINIMUM_WAIT = 50; // ms
 
@@ -33,6 +34,8 @@ export function* searchWordSaga(action) {
             });
             if (word.audio_file) {
                 yield put(maxObjectOutputAction(word.audio_file));
+            } else {
+                yield put(cacheWordAudioAction(word))
             }
         } else {
             yield put({
