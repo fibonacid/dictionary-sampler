@@ -7,6 +7,7 @@ export function* actionLogWatcher() {
         const postLevel = getPostLevelFromActionType(action.type);
         const message = `${action.type} ${action.payload}`;
         maxApi.post(message, postLevel);
+        //maxApi.outlet(`event ${action.type}`);
     })
 };
 
