@@ -8,6 +8,7 @@ import {clearCacheAction} from "./actions/clearCacheAction";
 import {changeDestLangAction, changeSrcLangAction} from "./actions/changeLanguageAction";
 import {resetAppAction} from "./actions/resetAppAction";
 import {clearStoreAction} from "./actions/clearStoreAction";
+import {searchWordsFromWebpageAction} from "./actions/searchWordsFromWebpage";
 
 var path = require('path');
 global.appRoot = path.resolve(process.cwd(), "..");
@@ -39,6 +40,9 @@ const handlers = {
    },
    search_word: word => {
        store.dispatch(searchWordAction(word));
+   },
+   search_url: url => {
+      store.dispatch(searchWordsFromWebpageAction(url))
    }
 };
 
