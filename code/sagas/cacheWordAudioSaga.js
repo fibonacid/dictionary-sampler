@@ -38,9 +38,9 @@ export function* cacheWordAudioSaga(action) {
             audio_file: path
          }));
 
-         yield put(updateSearchStatusAction(word.id, SEARCH_STATUS.AVAILABLE));
+         yield put(updateSearchStatusAction(word.search_id, `${SEARCH_STATUS.AVAILABLE} ${path}`));
 
-         yield put(maxObjectOutputAction(path));
+         //yield put(maxObjectOutputAction(path));
 
       } else {
          throw new Error("cache file couldn't be generated")

@@ -1,6 +1,5 @@
 import {types} from "../actions/actionTypes";
 import _ from 'lodash';
-import {SEARCH_STATUS} from "../lib/config/constants";
 
 export const searchesReducer = (state={}, action) => {
     switch(action.type) {
@@ -14,9 +13,10 @@ export const searchesReducer = (state={}, action) => {
 };
 
 function digestAddSearch(prevState, payload) {
-    const nextState = {};
-    nextState[payload.id] = {
-        id: payload.id,
+    const nextState = [];
+    const count = Object.keys(prevState).length;
+    nextState[`${payload.id}-${count}`] = {
+        id: count,
         status: payload.status
     };
     return _.merge({}, prevState, nextState);
@@ -25,7 +25,6 @@ function digestAddSearch(prevState, payload) {
 function digestUpdateSearchStatus(prevState, payload) {
     const nextState = {};
     nextState[payload.id] = {
-        id: payload.id,
         status: payload.status
     };
     return _.merge({}, prevState, nextState);

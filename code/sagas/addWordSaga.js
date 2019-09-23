@@ -38,14 +38,17 @@ export function* addWordWatcher() {
 export function* addWordSaga(action) {
    try {
 
-      yield put(updateSearchStatusAction(action.payload.word, SEARCH_STATUS.LOADING));
+      const { search_id } = action.payload.params;
+      yield put(updateSearchStatusAction(search_id, SEARCH_STATUS.LOADING));
 
       const response = yield call(fetchWord, action.payload);
       if (typeof response !== "undefined") {
          const word = digestData(response.data);
          yield put({
             type: types.ADD_WORD_SUCCESS,
-            payload: word
+            payload: {
+               word, search_id
+            }
          });
          yield put(cacheWordAudioAction(word));
 
@@ -58,7 +61,8 @@ export function* addWordSaga(action) {
          type: types.ADD_WORD_ERROR,
          error: error.message
       });
-      yield put(updateSearchStatusAction(action.payload.word, SEARCH_STATUS.FAILED));
+      const { search_id } = action.payload.params;
+      yield put(updateSearchStatusAction(search_id, SEARCH_STATUS.FAILED));
    }
 }
 

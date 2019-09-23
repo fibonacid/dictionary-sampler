@@ -44,14 +44,12 @@ export function* searchWordSaga(action) {
                 payload: action.payload
             });
 
-
-            console.log("searchWordSaga", JSON.stringify(action.payload));
-
-            yield put(addSearchAction(action.payload));
+            const search_id = yield put(addSearchAction(action.payload));
 
             const { src_lang } = yield select(state => state.base);
             yield put(addWordAction(action.payload, {
-                lang: src_lang
+                lang: src_lang,
+                search_id
             }));
         }
      }
