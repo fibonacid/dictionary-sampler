@@ -15,7 +15,7 @@ export const searchesReducer = (state={}, action) => {
 
 function digestAddSearch(prevState, payload) {
     const nextState = {};
-    nextState[payload] = {
+    nextState[payload.id] = {
         id: payload.id,
         status: payload.status
     };
