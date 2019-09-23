@@ -1,8 +1,5 @@
 import {combineReducers} from 'redux';
 import {wordsReducer} from './wordsReducer'
-import {cacheReducer} from "./cacheReducer";
-import {baseReducer} from "./baseReducer";
-import {searchesReducer} from "./searchesReducer";
 import {types} from "../actions/actionTypes";
 
 export const rootReducer = (state, action) => {
@@ -14,7 +11,7 @@ export const rootReducer = (state, action) => {
 
 const appReducer = combineReducers({
    words: wordsReducer,
-   cache: cacheReducer,
-   base: baseReducer,
-   searches: searchesReducer
+   //cache: cacheReducer,
+   //base: baseReducer,
+   //searches: searchesReducer
 });
