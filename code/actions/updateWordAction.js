@@ -1,6 +1,9 @@
 import {types} from "./actionTypes";
 
-export const updateWordAction = (id, status) => ({
+export const updateWordAction = (wordId, props) => ({
     type: types.UPDATE_WORD,
-    payload: { id, status }
+    payload: {
+        wordId,
+        props
+    }
 });

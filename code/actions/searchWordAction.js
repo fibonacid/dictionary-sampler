@@ -1,8 +1,6 @@
-import {types} from './actionTypes'
+import {types} from "./actionTypes";
 
-export function searchWordAction(word) {
-    return {
-        type: types.SEARCH_WORD,
-        payload: word
-    }
-};
+export const searchWordAction = word => ({
+   type: types.SEARCH_WORD,
+   payload: word
+});
