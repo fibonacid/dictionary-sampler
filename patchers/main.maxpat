@@ -39,13 +39,25 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-19",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 810.0, 603.00000011920929, 419.0, 23.0 ],
+					"text" : "https://en.wikipedia.org/wiki/The_Shawshank_Redemption"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-25",
 					"linecount" : 2,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 730.0, 636.950000000000045, 131.0, 38.0 ],
+					"patching_rect" : [ 810.0, 637.450000000000045, 131.0, 38.0 ],
 					"text" : ";\rtonode search_url $1"
 				}
 
@@ -96,7 +108,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 730.0, 220.0, 490.0, 369.0 ],
 					"rendermode" : 0,
-					"url" : "https://duckduckgo.com/?q=wikipedia&t=h_&ia=about"
+					"url" : "https://en.wikipedia.org/wiki/The_Shawshank_Redemption"
 				}
 
 			}
@@ -221,14 +233,14 @@
 					"patching_rect" : [ 299.0, 1256.5, 48.0, 136.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_initial" : [ 0.9 ],
-							"parameter_shortname" : "chan-1",
-							"parameter_type" : 0,
-							"parameter_unitstyle" : 4,
 							"parameter_mmin" : -70.0,
 							"parameter_longname" : "channel-1",
 							"parameter_initial_enable" : 1,
-							"parameter_mmax" : 6.0
+							"parameter_mmax" : 6.0,
+							"parameter_initial" : [ 0.9 ],
+							"parameter_shortname" : "chan-1",
+							"parameter_type" : 0,
+							"parameter_unitstyle" : 4
 						}
 
 					}
@@ -249,14 +261,14 @@
 					"patching_rect" : [ 472.0, 1256.5, 48.0, 136.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_initial" : [ 0.9 ],
-							"parameter_shortname" : "chan-4",
-							"parameter_type" : 0,
-							"parameter_unitstyle" : 4,
 							"parameter_mmin" : -70.0,
 							"parameter_longname" : "channel-4",
 							"parameter_initial_enable" : 1,
-							"parameter_mmax" : 6.0
+							"parameter_mmax" : 6.0,
+							"parameter_initial" : [ 0.9 ],
+							"parameter_shortname" : "chan-4",
+							"parameter_type" : 0,
+							"parameter_unitstyle" : 4
 						}
 
 					}
@@ -277,14 +289,14 @@
 					"patching_rect" : [ 415.0, 1256.5, 48.0, 136.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_initial" : [ 0.9 ],
-							"parameter_shortname" : "chan-3",
-							"parameter_type" : 0,
-							"parameter_unitstyle" : 4,
 							"parameter_mmin" : -70.0,
 							"parameter_longname" : "channel-3",
 							"parameter_initial_enable" : 1,
-							"parameter_mmax" : 6.0
+							"parameter_mmax" : 6.0,
+							"parameter_initial" : [ 0.9 ],
+							"parameter_shortname" : "chan-3",
+							"parameter_type" : 0,
+							"parameter_unitstyle" : 4
 						}
 
 					}
@@ -305,14 +317,14 @@
 					"patching_rect" : [ 355.0, 1256.5, 48.0, 136.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_initial" : [ 0.9 ],
-							"parameter_shortname" : "chan-2",
-							"parameter_type" : 0,
-							"parameter_unitstyle" : 4,
 							"parameter_mmin" : -70.0,
 							"parameter_longname" : "channel-2",
 							"parameter_initial_enable" : 1,
-							"parameter_mmax" : 6.0
+							"parameter_mmax" : 6.0,
+							"parameter_initial" : [ 0.9 ],
+							"parameter_shortname" : "chan-2",
+							"parameter_type" : 0,
+							"parameter_unitstyle" : 4
 						}
 
 					}
@@ -1141,8 +1153,6 @@
 					"saved_object_attributes" : 					{
 						"autostart" : 1,
 						"defer" : 0,
-						"node_bin_path" : "",
-						"npm_bin_path" : "",
 						"watch" : 1
 					}
 ,
@@ -1318,6 +1328,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-25", 0 ],
+					"source" : [ "obj-19", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-36", 0 ],
 					"source" : [ "obj-20", 0 ]
 				}
@@ -1369,7 +1386,18 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-25", 0 ],
+					"destination" : [ "obj-19", 1 ],
+					"midpoints" : [ 739.5, 636.00000011920929, 790.5, 636.00000011920929, 790.5, 592.00000011920929, 1219.5, 592.00000011920929 ],
+					"order" : 0,
+					"source" : [ "obj-3", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-19", 0 ],
+					"midpoints" : [ 739.5, 636.00000011920929, 801.0, 636.00000011920929, 801.0, 592.00000011920929, 819.5, 592.00000011920929 ],
+					"order" : 1,
 					"source" : [ "obj-3", 0 ]
 				}
 
@@ -1715,10 +1743,10 @@
 			}
  ],
 		"parameters" : 		{
+			"obj-68" : [ "channel-3", "chan-3", 0 ],
 			"obj-67" : [ "channel-2", "chan-2", 0 ],
 			"obj-69" : [ "channel-4", "chan-4", 0 ],
 			"obj-73" : [ "channel-1", "chan-1", 0 ],
-			"obj-68" : [ "channel-3", "chan-3", 0 ],
 			"parameterbanks" : 			{
 
 			}
@@ -1824,7 +1852,6 @@
 , 			{
 				"name" : "node-msg",
 				"default" : 				{
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.2, 0.2, 0.2, 1.0 ],
@@ -1834,7 +1861,8 @@
 						"proportion" : 0.5,
 						"autogradient" : 0.0
 					}
-
+,
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
 				}
 ,
 				"parentstyle" : "",
