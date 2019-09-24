@@ -14,7 +14,19 @@ export const wordsReducer = function(state={}, action) {
 }
 
 function digestStoreWord(prevState, payload) {
-    return prevState;
+    const nextState = {
+        data: {},
+        index: []
+    };
+
+    const { word } = payload;
+    if (word) {
+        nextState.data[word.id] = word;
+        nextState.index.push(word.id);
+    }
+    const data = _.merge({}, prevState.data, nextState.data);
+    const index = _.union([], prevState.index, nextState.index);
+    return { index, data }
 }
 
 function digestUpdateWord(prevState, payload) {
