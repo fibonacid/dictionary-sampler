@@ -1,4 +1,4 @@
-export const SEARCH_STATUS = {
+export const QUEUE_STATUS = {
   FAILED: "failed",
   QUEUED: "queued",
   LOADING: "loading",
