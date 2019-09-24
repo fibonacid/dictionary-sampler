@@ -1,6 +1,9 @@
 import {types} from "./actionTypes";
 
-export const addSearchToQueueAction = query => ({
+export const addSearchToQueueAction = (searchId, query) => ({
     type: types.ADD_SEARCH_TO_QUEUE,
-    payload: query
+    payload: {
+        searchId,
+        query
+    }
 });
