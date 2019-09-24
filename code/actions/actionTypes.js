@@ -11,20 +11,26 @@ export const types = {
    MAX_POLY_KILL_VOICE: "MAX_POLY_KILL_VOICE",
    MAX_SET_DICTIONARY: "MAX_SET_DICTIONARY",
    REMOVE_SEARCH_FROM_QUEUE: "REMOVE_SEARCH_FROM_QUEUE",
+   REMOVE_WORD: "REMOVE_WORD",
    SEARCH_WORD: "SEARCH_WORD",
    STORE_WORD: "STORE_WORD",
    UPDATE_QUEUED_SEARCH: "UPDATE_QUEUED_ITEM",
-   UPDATE_WORD: "UPDATE_WORD"
+   UPDATE_WORD: "UPDATE_WORD",
+   INITIALIZE_STORE: "INITIALIZE_STORE",
+   CLEAR_CACHE: "CLEAR_CACHE"
 };
 
-export const successTypes = () => {
+function _successTypes() {
    return _.pick(types, [
 
    ]);
 };
 
-export const errorTypes = () => {
+function _errorTypes() {
    return _.pick(types, [
 
    ]);
 };
+
+export const successTypes = _successTypes();
+export const errorTypes = _errorTypes();
