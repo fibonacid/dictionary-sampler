@@ -1,5 +1,5 @@
 import {takeEvery} from "redux-saga/effects";
-import {maxApi} from "../lib/config/maxApi";
+import {maxConsoleOut} from "../lib/config/maxApi";
 
 export function* actionLogWatcher() {
     yield takeEvery('*', function* logger(action) {
@@ -8,6 +8,6 @@ export function* actionLogWatcher() {
             message += " => ";
             message += action.payload || action.error;
         }
-        maxApi.post(message);
+        maxConsoleOut(message);
     })
 };
