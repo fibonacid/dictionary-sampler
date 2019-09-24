@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux';
 import {wordsReducer} from './wordsReducer'
 import {types} from "../actions/actionTypes";
+import {queueReducer} from "./queueReducer";
 
 export const rootReducer = (state, action) => {
    if (action.type === types.CLEAR_STORE) {
@@ -11,7 +12,5 @@ export const rootReducer = (state, action) => {
 
 const appReducer = combineReducers({
    words: wordsReducer,
-   //cache: cacheReducer,
-   //base: baseReducer,
-   //searches: searchesReducer
+   queue: queueReducer
 });

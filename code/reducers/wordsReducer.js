@@ -1,48 +1,26 @@
 import {types} from "../actions/actionTypes";
-import _ from 'lodash';
 
-const initialState = {
-   data: {},
-   index: []
-};
+export const wordsReducer = function(state={}, action) {
+    switch(action.type) {
+        case types.STORE_WORD:
+            return digestStoreWord(state, action.payload);
+        case types.UPDATE_WORD:
+            return digestUpdateWord(state, action.payload);
+        case types.REMOVE_WORD:
+            return digestRemoveWord(state, action.payload);
+        default:
+            return state;
+    }
+}
 
-export const wordsReducer = (state=initialState, action) => {
-   switch(action.type) {
-      case types.ADD_WORD:
-         return state;
-      case types.ADD_WORD_SUCCESS:
-         return digestAddWord(state, action.payload);
-      case types.ADD_WORD_ERROR:
-         return state;
-      case types.UPDATE_WORD:
-         return digestUpdateWord(state, action.payload);
-      default:
-         return state
-   }
-};
-
-function digestAddWord(prevState, payload) {
-   const nextState = {
-      data: {},
-      index: []
-   };
-   if (payload && payload.id) {
-      nextState.data[payload.id] = payload;
-      nextState.index.push(`${payload.id}`);
-   }
-   const data = _.merge({}, prevState.data, nextState.data);
-   const index = _.union([], prevState.index, nextState.index);
-   return { index, data }
+function digestStoreWord(prevState, payload) {
+    return prevState;
 }
 
 function digestUpdateWord(prevState, payload) {
-   const nextState = {
-      data: {},
-      index: []
-   };
-   nextState.data[payload.id] = _.assign(nextState.data[payload.id], payload.args);
+    return prevState;
+}
 
-   const data = _.merge({}, prevState.data, nextState.data);
-   const index = _.union([], prevState.index, nextState.index);
-   return { data, index };
+function digestRemoveWord(prevState, payload) {
+    return prevState;
 }
