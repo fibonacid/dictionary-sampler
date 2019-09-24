@@ -4,7 +4,7 @@ import {types} from "../actions/actionTypes";
 import {queueReducer} from "./queueReducer";
 
 export const rootReducer = (state, action) => {
-   if (action.type === types.CLEAR_STORE) {
+   if (action.type === types.INITIALIZE_STORE) {
       return {}
    }
    return appReducer(state, action)
