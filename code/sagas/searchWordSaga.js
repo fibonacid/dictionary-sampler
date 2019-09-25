@@ -15,6 +15,7 @@ import {
     maxPolyTildeMessage,
     maxSendRefresh,
 } from "../lib/config/maxApi";
+import {fetchWordAction} from "../actions/fetchWordAction";
 
 const searchSelector = (state, searchId) => state.queue[searchId];
 const wordSelector = (state, wordId) => state.words[wordId];
@@ -37,9 +38,9 @@ export function* searchWordSaga(action) {
     // Remove non alphanumeric values from query
     const query = cleanID(action.payload);
 
-    /* =========================
-     * ADD SEARCH TO QUEUE
-     * ========================= */
+/* =========================
+ * ADD SEARCH TO QUEUE
+ * ========================= */
 
     // 1. Increase search cont
     yield put(increaseSearchCountAction());
@@ -58,9 +59,9 @@ export function* searchWordSaga(action) {
     // Output max poly~ message "queued"
     yield call(maxPolyTildeMessage, searchCount, storedSearch.status);
 
-    /* ==============================
-     * PROVIDE WORD FOR QUERY
-     * ============================== */
+/* ==============================
+ * PROVIDE WORD FOR QUERY
+ * ============================== */
 
     // Try query as key to retrieve a word from the store
     const storedWord = yield select(wordSelector, query);
@@ -68,10 +69,7 @@ export function* searchWordSaga(action) {
     if (storedWord) {
         // If word has an audio file
         if (storedWord.audioFile) {
-            // Set poly target
-            yield call(maxPolyTildeTarget, searchId);
-            // Send path of audiofile
-            yield call (maxMessageOut, storedWord.audioFile);
+
         }
         // If word doesn't have an audio file
         else {
@@ -80,7 +78,11 @@ export function* searchWordSaga(action) {
     }
     // Else, if query doesn't have any word in the store:
     else {
-
+        // Call saga to fetch a word from the Oxford API
+        yield put(fetchWordAction(query));
+        // Get fetched word from store
+        const word = yield select(wordSelector, query);
+        //console.log(`word = ${word}`);
     }
 };
 
