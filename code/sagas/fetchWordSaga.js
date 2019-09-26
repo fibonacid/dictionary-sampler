@@ -1,7 +1,8 @@
-import {takeEvery, call} from "redux-saga/effects";
+import {takeEvery, call, put} from "redux-saga/effects";
 import {types} from "../actions/actionTypes";
 import {OxfordApi} from "../lib/helpers/OxfordApi";
 import _ from 'lodash'
+import {fetchWordSuccess, fetchWordErrorAction} from "../actions/fetchWordAction";
 
 export function* fetchWordWatcher() {
     yield takeEvery(types.FETCH_WORD, fetchWordSaga)
@@ -9,9 +10,17 @@ export function* fetchWordWatcher() {
 
 export function* fetchWordSaga(action) {
     const word = action.payload;
-    const response = yield call(OxfordApi.searchWord, word);
-    const fetchedWord = digestResponse(response);
-    console.log(fetchedWord);
+    try {
+        // Make API call
+        const response = yield call(OxfordApi.searchWord, word);
+        // Digest response
+        const fetchedWord = digestResponse(response);
+        yield put(fetchWordSuccess(fetchedWord))
+    }
+    // If there have been any errors:
+    catch(e) {
+        yield put(fetchWordErrorAction(e));
+    }
 }
 
 function digestResponse(response) {
