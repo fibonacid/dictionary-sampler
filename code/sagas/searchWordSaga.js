@@ -72,6 +72,10 @@ export function* searchWordSaga(action) {
     const storedWord = yield select(wordSelector, query);
     // If query matches a word in the store:
     if (storedWord) {
+        // Update search status
+        yield put(updateQueuedSearchAction(searchId, QUEUE_STATUS.AVAILABLE));
+        // Refresh Max dictionary
+        yield call(maxSendRefresh);
         // If word has an audio file
         if (storedWord.audioFile) {
 
