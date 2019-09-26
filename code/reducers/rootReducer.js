@@ -1,6 +1,6 @@
+import {types} from "../actions/actionTypes";
 import {combineReducers} from 'redux';
 import {wordsReducer} from './wordsReducer'
-import {types} from "../actions/actionTypes";
 import {queueReducer} from "./queueReducer";
 import {baseReducer} from "./baseReducer";
 
