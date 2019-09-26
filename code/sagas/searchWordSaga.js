@@ -16,9 +16,14 @@ import {
     maxSendRefresh,
 } from "../lib/config/maxApi";
 import {fetchWordAction} from "../actions/fetchWordAction";
+import {updateQueuedSearchAction} from "../actions/updateQueuedSearchAction";
+import {QUEUE_STATUS} from "../lib/config/constants";
 
 const searchSelector = (state, searchId) => state.queue[searchId];
-const wordSelector = (state, wordId) => state.words[wordId];
+const wordSelector = (state, wordId) => {
+    const { words } = state;
+    return words.data[wordId];
+};
 const searchCountSelector = state => state.base.searchCount;
 
 export function* searchWordWatcher() {
