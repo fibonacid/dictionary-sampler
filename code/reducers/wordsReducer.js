@@ -1,9 +1,14 @@
 import {types} from "../actions/actionTypes";
 
-export const wordsReducer = function(state={}, action) {
+const initialState = {
+    data: {},
+    index: {}
+};
+
+export const wordsReducer = function(state=initialState, action) {
     switch(action.type) {
-        case types.STORE_WORD:
-            return digestStoreWord(state, action.payload);
+        case types.FETCH_WORD_SUCCESS:
+            return digestNewWord(state, action.payload);
         case types.UPDATE_WORD:
             return digestUpdateWord(state, action.payload);
         case types.REMOVE_WORD:
@@ -11,18 +16,16 @@ export const wordsReducer = function(state={}, action) {
         default:
             return state;
     }
-}
+};
 
-function digestStoreWord(prevState, payload) {
+function digestNewWord(prevState, payload) {
     const nextState = {
         data: {},
         index: []
     };
-
-    const { word } = payload;
-    if (word) {
-        nextState.data[word.id] = word;
-        nextState.index.push(word.id);
+    if (payload) {
+        nextState.data[payload.id] = payload;
+        nextState.index.push(payload.id);
     }
     const data = _.merge({}, prevState.data, nextState.data);
     const index = _.union([], prevState.index, nextState.index);
