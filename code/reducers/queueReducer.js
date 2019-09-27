@@ -27,7 +27,11 @@ function digestNewSearch(prevState, payload) {
 }
 
 function digestUpdateSearch(prevState, payload) {
-    return prevState;
+    const nextState = {};
+    nextState[payload.id] = {
+        status: payload.status
+    };
+    return _.merge({}, prevState, nextState);
 }
 
 function digestRemoveSearch(prevState, payload) {
