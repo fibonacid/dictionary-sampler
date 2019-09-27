@@ -11,15 +11,11 @@ import {
     call,
     race
 } from 'redux-saga/effects'
-import {
-    maxPolyTildeMessage,
-    maxSendRefresh,
-} from "../lib/config/maxApi";
 import {fetchWordAction} from "../actions/fetchWordAction";
+import {searchWordSuccessAction, searchWordTimeoutAction} from "../actions/searchWordAction";
 import {updateQueuedSearchAction} from "../actions/updateQueuedSearchAction";
 import {QUEUE_STATUS} from "../lib/config/constants";
 
-const searchSelector = (state, searchId) => state.queue[searchId];
 const wordSelector = (state, wordId) => {
     const { words } = state;
     return words.data[wordId];
@@ -55,51 +51,55 @@ export function* searchWordSaga(action) {
     const searchId = `${searchCount}-${query}`;
 
     // 3. Add search to queue
-    yield put(addSearchToQueueAction(searchId, query));
-    let searchInstance = yield select(searchSelector, searchId);
-
-    // Refresh Max dictionary
-    yield call(maxSendRefresh);
-    // Output max poly~ message "queued"
-    yield call(maxPolyTildeMessage, searchCount, searchInstance.status);
+    yield put(addSearchToQueueAction(searchId, query, searchCount));
 
 /* ==============================
- * PROVIDE WORD FOR QUERY
+ *  RESPOND TO QUERY
  * ============================== */
 
     // Try query as key to retrieve a word from the store
     let storedWord = yield select(wordSelector, query);
+
     // If word is not present in the store
     if (!storedWord) {
+
         // Fetch word from API
         yield put(fetchWordAction(query));
+
         // Wait for either a success or an error
-        const { success } = yield race({
+        const { success, timeout } = yield race({
             success: take(types.DOWNLOAD_WORD_AUDIO_SUCCESS),
             timeout: delay(5000)
         });
+
         // If success won the race
         if (success) {
-            // Change status of search
-            const newStatus = QUEUE_STATUS.AVAILABLE;
-            yield put(updateQueuedSearchAction(searchId, newStatus));
-            // Refresh Max dictionary
-            yield call(maxSendRefresh);
-            // Output max poly~ message
-            yield call(maxPolyTildeMessage, searchCount,
-                `${newStatus} ${success.payload}`
-            );
-            //console.log(JSON.stringify(success, null, 2));
+            // Dispatch search success
+            yield put(searchWordSuccessAction(searchId));
+            // Dispatch queue update with a result
+            yield put(updateQueuedSearchAction(searchId,
+                QUEUE_STATUS.AVAILABLE, success.payload.filename
+            ));
+        }
+        else if (timeout) {
+            yield put(searchWordTimeoutAction(searchId));
         }
     }
     // If word has already been fetched
     else {
+
+        /* ================================
+         *  FETCH WORD FROM THE STORE
+         * ================================ */
+
         // If word has an "audioFile" property
-        if (_.has(storedWord, "remotefile")) {
+        if (_.has(storedWord, "localfile")) {
             // Send audioFile to max poly~ object
-            const message = `${searchInstance.status} ${storedWord.remotefile}`;
-            yield call(maxPolyTildeMessage, message);
+            /*yield call(maxPolyTildeMessage, searchCount,
+                `${searchInstance.status} ${storedWord.localfile}`
+            );*/
         }
     }
 };
+
 

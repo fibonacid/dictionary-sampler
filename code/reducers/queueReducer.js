@@ -1,6 +1,6 @@
 import {types} from "../actions/actionTypes";
 import _ from 'lodash';
-import {QUEUE_STATUS} from "../lib/config/constants";
+
 
 const initialState = {};
 
@@ -19,19 +19,14 @@ export const queueReducer = (state=initialState, action) => {
 
 function digestNewSearch(prevState, payload) {
     const newState = {};
-    newState[payload.searchId] = {
-        query: payload.query,
-        status: QUEUE_STATUS.QUEUED
-    };
+    newState[payload.searchId] = _.assign(newState[payload.searchId], payload.args);
     return _.merge({}, prevState, newState);
 }
 
 function digestUpdateSearch(prevState, payload) {
-    const nextState = {};
-    nextState[payload.id] = {
-        status: payload.status
-    };
-    return _.merge({}, prevState, nextState);
+    const newState = {};
+    newState[payload.searchId] = _.assign(newState[payload.searchId], payload.args);
+    return _.merge({}, prevState, newState);
 }
 
 function digestRemoveSearch(prevState, payload) {
