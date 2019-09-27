@@ -20,14 +20,11 @@ export function* downloadWordAudioSaga(action) {
             // store path of downloaded file
             const path = yield call(downloadAudio, url);
             // If path is undefined
-            if (!path) {
-                // Throw error
-                throw new Error("path is undefined");
-            }
-            // Else, if path is defined
-            else {
+            if (typeof path !== "undefined") {
                 // Dispatch Success
-                yield put(downloadWordAudioSuccessAction);
+                yield put(downloadWordAudioSuccessAction(path));
+            } else {
+                throw new Error('path is undefined');
             }
         } catch(error) {
             yield put(downloadWordAudioErrorAction(error));
