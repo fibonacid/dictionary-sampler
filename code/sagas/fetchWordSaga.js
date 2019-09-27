@@ -3,6 +3,7 @@ import {types} from "../actions/actionTypes";
 import {OxfordApi} from "../lib/helpers/OxfordApi";
 import _ from 'lodash'
 import {fetchWordSuccess, fetchWordErrorAction} from "../actions/fetchWordAction";
+import {downloadWordAudioAction} from "../actions/downloadWordAudioAction";
 
 export function* fetchWordWatcher() {
     yield takeEvery(types.FETCH_WORD, fetchWordSaga)
@@ -15,7 +16,9 @@ export function* fetchWordSaga(action) {
         const response = yield call(OxfordApi.searchWord, word);
         // Digest response
         const fetchedWord = digestResponse(response);
-        yield put(fetchWordSuccess(fetchedWord))
+        yield put(fetchWordSuccess(fetchedWord));
+        // Download audio from url
+        yield put(downloadWordAudioAction(fetchedWord));
     }
     // If there have been any errors:
     catch(e) {
