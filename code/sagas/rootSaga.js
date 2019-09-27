@@ -3,12 +3,14 @@ import {actionLogWatcher} from "./actionLogSaga";
 import {searchWordWatcher} from "./searchWordSaga";
 import {logStoreWatcher} from "./logStoreSaga";
 import {fetchWordWatcher} from "./fetchWordSaga";
+import {downloadWordAudioWatcher} from "./downloadWordAudioSaga";
 
 // notice how we now only export the rootSaga
 // single entry point to start all Sagas at once
 export default function* rootSaga() {
    yield all([
       actionLogWatcher(),
+      downloadWordAudioWatcher(),
       fetchWordWatcher(),
       logStoreWatcher(),
       searchWordWatcher()
