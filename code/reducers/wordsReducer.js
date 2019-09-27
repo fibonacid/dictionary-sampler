@@ -41,12 +41,8 @@ function digestUpdateWord(prevState, payload) {
     };
     nextState.data[payload.id] =
         _.assign(nextState.data[payload.id], payload.args);
-
     const data = _.merge({}, prevState.data, nextState.data);
     const index = _.union([], prevState.index, nextState.index);
-
-    console.log(`digestUpdateWord: ${JSON.stringify(payload, null, 1)}`);
-
     return { data, index };
 }
 
