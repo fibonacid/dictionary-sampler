@@ -5,9 +5,11 @@ export const downloadWordAudioAction = word => ({
     payload: word
 });
 
-export const downloadWordAudioSuccessAction = filename => ({
+export const downloadWordAudioSuccessAction = (wordId, filename) => ({
     type: types.DOWNLOAD_WORD_AUDIO_SUCCESS,
-    payload: filename
+    payload: {
+        wordId, filename
+    }
 });
 
 export const downloadWordAudioErrorAction = error => ({
