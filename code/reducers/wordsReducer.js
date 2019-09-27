@@ -39,8 +39,9 @@ function digestUpdateWord(prevState, payload) {
         data: {},
         index: []
     };
-    nextState.data[payload.id] =
-        _.assign(nextState.data[payload.id], payload.args);
+    nextState.data[payload.id] = _.assign(
+        nextState.data[payload.id], payload.args
+    );
     const data = _.merge({}, prevState.data, nextState.data);
     const index = _.union([], prevState.index, nextState.index);
     return { data, index };
