@@ -45,7 +45,7 @@ function digestResponse(response) {
         const { audioFile } = _.find(entry.pronunciations, p => {
             return typeof p.audioFile != "undefined"
         });
-        outputObject.audioFileUrl = audioFile;
+        outputObject.remotefile = audioFile;
     }
     return outputObject;
 }

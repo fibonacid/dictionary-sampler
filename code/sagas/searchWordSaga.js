@@ -95,11 +95,10 @@ export function* searchWordSaga(action) {
     // If word has already been fetched
     else {
         // If word has an "audioFile" property
-        if (_.has(storedWord, "audioFile")) {
+        if (_.has(storedWord, "remotefile")) {
             // Send audioFile to max poly~ object
-            yield call(maxPolyTildeMessage,
-                `${searchInstance.status} ${storedWord.audioFile}`
-            );
+            const message = `${searchInstance.status} ${storedWord.remotefile}`;
+            yield call(maxPolyTildeMessage, message);
         }
     }
 };

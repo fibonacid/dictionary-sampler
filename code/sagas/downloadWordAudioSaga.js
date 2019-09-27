@@ -6,6 +6,7 @@ import {
     downloadWordAudioSuccessAction,
     downloadWordAudioErrorAction
 } from "../actions/downloadWordAudioAction";
+import {updateWordAction} from "../actions/updateWordAction";
 
 export function* downloadWordAudioWatcher() {
     yield takeEvery(types.DOWNLOAD_WORD_AUDIO, downloadWordAudioSaga);
@@ -13,16 +14,15 @@ export function* downloadWordAudioWatcher() {
 
 export function* downloadWordAudioSaga(action) {
     const word = action.payload;
-    if (word && word.audioFileUrl) {
-        const url = word.audioFileUrl;
+    if (word && word.remotefile) {
         try {
             // Launch download audio task and
             // store path of downloaded file
-            const path = yield call(downloadAudio, url);
+            const path = yield call(downloadAudio, word.remotefile);
             // If path is undefined
             if (typeof path !== "undefined") {
                 // Dispatch Success
-                yield put(downloadWordAudioSuccessAction(path));
+                yield put(downloadWordAudioSuccessAction(word.id, path));
             } else {
                 throw new Error('path is undefined');
             }
