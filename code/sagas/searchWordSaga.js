@@ -11,13 +11,10 @@ import {
     call
 } from 'redux-saga/effects'
 import {
-    maxMessageOut,
     maxPolyTildeMessage,
     maxSendRefresh,
 } from "../lib/config/maxApi";
 import {fetchWordAction} from "../actions/fetchWordAction";
-import {updateQueuedSearchAction} from "../actions/updateQueuedSearchAction";
-import {QUEUE_STATUS} from "../lib/config/constants";
 
 const searchSelector = (state, searchId) => state.queue[searchId];
 const wordSelector = (state, wordId) => {
@@ -69,29 +66,21 @@ export function* searchWordSaga(action) {
  * ============================== */
 
     // Try query as key to retrieve a word from the store
-    const storedWord = yield select(wordSelector, query);
-    // If query matches a word in the store:
-    if (storedWord) {
-        // Update search status
-        yield put(updateQueuedSearchAction(searchId, QUEUE_STATUS.AVAILABLE));
-        // Refresh Max dictionary
-        yield call(maxSendRefresh);
-        // If word has an audio file
-        if (storedWord.audioFile) {
-
-        }
-        // If word doesn't have an audio file
-        else {
-
-        }
-    }
-    // Else, if query doesn't have any word in the store:
-    else {
-        // Call saga to fetch a word from the Oxford API
+    let storedWord = yield select(wordSelector, query);
+    // If word is not present in the store
+    if (!storedWord) {
+        // Fetch word from API
         yield put(fetchWordAction(query));
-        // Get fetched word from store
-        const word = yield select(wordSelector, query);
-        //console.log(`word = ${word}`);
+    }
+    // If word has already been fetched
+    else {
+        // If word has an "audioFile" property
+        if (_.has(storedWord, "audioFile")) {
+            // Send audioFile to max poly~ object
+            yield call(maxPolyTildeMessage,
+                `${storedSearch.status} ${storedWord.audioFile}`
+            );
+        }
     }
 };
 
