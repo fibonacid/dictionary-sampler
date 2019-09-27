@@ -41,7 +41,7 @@ function downloadAudio(url) {
         .then( path => {
             return path
         })
-        .then( error => {
+        .catch( error => {
             throw error
         });
 }
