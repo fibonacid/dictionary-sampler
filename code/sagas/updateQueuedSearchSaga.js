@@ -15,9 +15,9 @@ export function* updateQueuedSearchSaga({payload}) {
     if (result) {
         message = `${message} ${result}`
     }
-    // Output max poly~ message "queued"
-    yield call(maxPolyTildeMessage, polyTarget, message);
-    // Refresh Max dictionary
-    yield call(maxSendRefresh);
+    // // Output max poly~ message "queued"
+    // yield call(maxPolyTildeMessage, polyTarget, message);
+    // // Refresh Max dictionary
+    // yield call(maxSendRefresh);
 }
 

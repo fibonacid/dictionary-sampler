@@ -12,8 +12,8 @@ import {
     race
 } from 'redux-saga/effects'
 import {fetchWordAction} from "../actions/fetchWordAction";
-import {searchWordSuccessAction, searchWordTimeoutAction} from "../actions/searchWordAction";
-import {updateQueuedSearchAction} from "../actions/updateQueuedSearchAction";
+import {searchWordErrorAction, searchWordSuccessAction, searchWordTimeoutAction} from "../actions/searchWordAction";
+import {maxPolyTildeMessage, maxSendRefresh} from "../lib/config/maxApi";
 import {QUEUE_STATUS} from "../lib/config/constants";
 
 const wordSelector = (state, wordId) => {
@@ -53,6 +53,11 @@ export function* searchWordSaga(action) {
     // 3. Add search to queue
     yield put(addSearchToQueueAction(searchId, query, searchCount));
 
+    // Output max poly~ message "queued"
+    yield call(maxPolyTildeMessage, searchCount, QUEUE_STATUS.QUEUED);
+    // Refresh Max dictionary
+    yield call(maxSendRefresh);
+
 /* ==============================
  *  RESPOND TO QUERY
  * ============================== */
@@ -63,26 +68,41 @@ export function* searchWordSaga(action) {
     // If word is not present in the store
     if (!storedWord) {
 
+        // Output max poly~ message "queued"
+        yield call(maxPolyTildeMessage, searchCount, QUEUE_STATUS.LOADING);
+        // Refresh Max dictionary
+        yield call(maxSendRefresh);
+
         // Fetch word from API
         yield put(fetchWordAction(query));
 
         // Wait for either a success or an error
-        const { success, timeout } = yield race({
+        const { success, failure, timeout } = yield race({
             success: take(types.DOWNLOAD_WORD_AUDIO_SUCCESS),
+            failure: take(types.FETCH_WORD_ERROR),
             timeout: delay(5000)
         });
 
         // If success won the race
-        if (success) {
+        if (typeof success !== "undefined") {
             // Dispatch search success
-            yield put(searchWordSuccessAction(searchId));
-            // Dispatch queue update with a result
-            yield put(updateQueuedSearchAction(searchId,
-                QUEUE_STATUS.AVAILABLE, success.payload.filename
+            yield put(searchWordSuccessAction(
+                searchId,
+                success.payload.filename
             ));
         }
-        else if (timeout) {
-            yield put(searchWordTimeoutAction(searchId));
+        else if (typeof timeout !== "undefined") {
+            // Dispatch search timeout
+            yield put(searchWordTimeoutAction(
+                searchId,
+                "Request took too long to complete"
+            ));
+        }
+        else if (typeof failure !== "undefined") {
+            yield put(searchWordErrorAction(
+                searchId,
+                failure.error
+            ))
         }
     }
     // If word has already been fetched
@@ -92,12 +112,13 @@ export function* searchWordSaga(action) {
          *  FETCH WORD FROM THE STORE
          * ================================ */
 
-        // If word has an "audioFile" property
+        // If word has a "localfile" property
         if (_.has(storedWord, "localfile")) {
             // Send audioFile to max poly~ object
-            /*yield call(maxPolyTildeMessage, searchCount,
-                `${searchInstance.status} ${storedWord.localfile}`
-            );*/
+            yield put(searchWordSuccessAction(searchId));
+            // yield put(updateQueuedSearchAction(searchId,
+            //     QUEUE_STATUS.AVAILABLE, storedWord.localfile
+            // ));
         }
     }
 };

@@ -6,6 +6,7 @@ import {fetchWordWatcher} from "./fetchWordSaga";
 import {downloadWordAudioWatcher} from "./downloadWordAudioSaga";
 import {updateQueuedSearchWatcher} from "./updateQueuedSearchSaga";
 import {addSearchToQueueWatcher} from "./addSearchToQueueSaga";
+import {searchWordResolveWatcher} from "./searchWordResolveSaga";
 
 // notice how we now only export the rootSaga
 // single entry point to start all Sagas at once
@@ -17,6 +18,7 @@ export default function* rootSaga() {
       fetchWordWatcher(),
       logStoreWatcher(),
       searchWordWatcher(),
+      searchWordResolveWatcher(),
       updateQueuedSearchWatcher()
    ])
 }

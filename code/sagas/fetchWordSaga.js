@@ -22,7 +22,7 @@ export function* fetchWordSaga(action) {
     }
     // If there have been any errors:
     catch(e) {
-        yield put(fetchWordErrorAction(e));
+        yield put(fetchWordErrorAction(e.message));
     }
 }
 

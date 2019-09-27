@@ -4,5 +4,5 @@ export const QUEUE_STATUS = {
   LOADING: "loading",
   LOADED: "loaded",
   AVAILABLE: "available",
-  UNAVAILABLE: "unavailable"
+  TIMEOUT: "timeout"
 };
