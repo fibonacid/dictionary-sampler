@@ -4,6 +4,7 @@ import {searchWordAction} from "./actions/searchWordAction";
 import {initializeStoreAction} from "./actions/initializeStoreAction";
 import {clearCacheAction} from "./actions/clearCacheAction";
 import {logStoreAction} from "./actions/logStoreAction";
+import {setMaxSearchesAction} from "./actions/setMaxSearchesAction";
 
 var path = require('path');
 global.appRoot = path.resolve(process.cwd(), "..");
@@ -25,6 +26,9 @@ const handlers = {
     search_word: function(word) {
         store.dispatch(searchWordAction(word));
     },
+    set_max_searches: function(number) {
+        store.dispatch(setMaxSearchesAction(number))
+    }
 };
 
 /** */
