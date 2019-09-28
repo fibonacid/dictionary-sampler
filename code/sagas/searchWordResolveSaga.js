@@ -3,16 +3,17 @@ import {types} from "../actions/actionTypes";
 import {QUEUE_STATUS} from "../lib/config/constants";
 import {updateQueuedSearchAction} from "../actions/updateQueuedSearchAction";
 import {maxPolyTildeMessage, maxSendRefresh} from "../lib/config/maxApi";
+import {removeSearchFromQueueAction} from "../actions/removeSearchFromQueueAction";
 
-export function* searchWordResolveWatcher() {
+const searchSelector = (state, searchId) => state.queue[searchId];
+
+export function* searchWordResolveWatcher(action) {
     yield all([
         takeEvery(types.SEARCH_WORD_SUCCESS, searchWordSuccessSaga),
         takeEvery(types.SEARCH_WORD_ERROR, searchWordErrorSaga),
         takeEvery(types.SEARCH_WORD_TIMEOUT, searchWordTimeoutSaga),
     ]);
 }
-
-const searchSelector = (state, searchId) => state.queue[searchId];
 
 export function* searchWordSuccessSaga(action) {
     const { searchId, result } = action.payload;
@@ -23,7 +24,7 @@ export function* searchWordSuccessSaga(action) {
     // Output result to max poly~ object
     yield call(
         maxPolyTildeMessage,
-        search.polyTarget,
+        search.polyTarget+1, // add 1 to avoid "target 0"
         `${QUEUE_STATUS.AVAILABLE} ${result}`
     );
     // Refresh Max dictionary
@@ -39,7 +40,7 @@ export function* searchWordErrorSaga(action) {
     // Output message to max poly~ object
     yield call(
         maxPolyTildeMessage,
-        search.polyTarget,
+        search.polyTarget+1, // add 1 to avoid "target 0"
         QUEUE_STATUS.FAILED
     );
     // Refresh Max dictionary
@@ -54,7 +55,7 @@ export function* searchWordTimeoutSaga(action) {
     ));
     yield call(
         maxPolyTildeMessage,
-        search.polyTarget,
+        search.polyTarget+1, // add 1 to avoid "target 0"
         QUEUE_STATUS.TIMEOUT
     );
     // Refresh Max dictionary
