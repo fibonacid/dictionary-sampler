@@ -1,6 +1,6 @@
 import {types} from "./actionTypes";
 
 export const removeSearchFromQueueAction = searchId => ({
-    type: types.UPDATE_QUEUED_SEARCH,
+    type: types.REMOVE_SEARCH_FROM_QUEUE,
     payload: searchId
 });
