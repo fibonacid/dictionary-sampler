@@ -4,7 +4,6 @@ import {searchWordWatcher} from "./searchWordSaga";
 import {logStoreWatcher} from "./logStoreSaga";
 import {fetchWordWatcher} from "./fetchWordSaga";
 import {downloadWordAudioWatcher} from "./downloadWordAudioSaga";
-import {updateQueuedSearchWatcher} from "./updateQueuedSearchSaga";
 import {addSearchToQueueWatcher} from "./addSearchToQueueSaga";
 import {searchWordResolveWatcher} from "./searchWordResolveSaga";
 
@@ -19,6 +18,5 @@ export default function* rootSaga() {
       logStoreWatcher(),
       searchWordWatcher(),
       searchWordResolveWatcher(),
-      updateQueuedSearchWatcher()
    ])
 }
