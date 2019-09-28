@@ -27,8 +27,8 @@ export function* searchWordSuccessSaga(action) {
         search.polyTarget+1, // add 1 to avoid "target 0"
         `${QUEUE_STATUS.AVAILABLE} ${result}`
     );
-    // Refresh Max dictionary
-    yield call(maxSendRefresh);
+    // Remove search from queue
+    yield put(removeSearchFromQueueAction(searchId));
 }
 
 export function* searchWordErrorSaga(action) {
@@ -43,8 +43,8 @@ export function* searchWordErrorSaga(action) {
         search.polyTarget+1, // add 1 to avoid "target 0"
         QUEUE_STATUS.FAILED
     );
-    // Refresh Max dictionary
-    yield call(maxSendRefresh);
+    // Remove search from queue
+    yield put(removeSearchFromQueueAction(searchId));
 }
 
 export function* searchWordTimeoutSaga(action) {
@@ -58,6 +58,6 @@ export function* searchWordTimeoutSaga(action) {
         search.polyTarget+1, // add 1 to avoid "target 0"
         QUEUE_STATUS.TIMEOUT
     );
-    // Refresh Max dictionary
-    yield call(maxSendRefresh);
+    // Remove search from queue
+    yield put(removeSearchFromQueueAction(searchId));
 }
