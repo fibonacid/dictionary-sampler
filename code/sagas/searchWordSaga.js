@@ -112,10 +112,15 @@ export function* searchWordSaga(action) {
         // If word has a "localfile" property
         if (_.has(storedWord, "localfile")) {
             // Send audioFile to max poly~ object
-            yield put(searchWordSuccessAction(searchId));
-            // yield put(updateQueuedSearchAction(searchId,
-            //     QUEUE_STATUS.AVAILABLE, storedWord.localfile
-            // ));
+            yield put(searchWordSuccessAction(
+                searchId,
+                storedWord.localfile
+            ));
+        } else {
+            yield put(searchWordErrorAction(
+                searchId,
+                `${storedWord.id} should have a "localfile" property`
+            ))
         }
     }
 };
