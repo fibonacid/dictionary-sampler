@@ -43,9 +43,6 @@ export function* searchWordSaga(action) {
  * ADD SEARCH TO QUEUE
  * ========================= */
 
-    // 1. Increase search cont
-    yield put(increaseSearchCountAction());
-
     // 2. Generate an ID
     const searchCount = yield select(searchCountSelector);
     const searchId = `${searchCount}-${query}`;
