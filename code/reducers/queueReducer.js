@@ -30,5 +30,5 @@ function digestUpdateSearch(prevState, payload) {
 }
 
 function digestRemoveSearch(prevState, payload) {
-    return prevState;
+    return _.omit(prevState, payload.searchId);
 }
