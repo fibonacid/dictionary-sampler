@@ -24,7 +24,7 @@ export function* searchWordSuccessSaga(action) {
     // Output result to max poly~ object
     yield call(
         maxPolyTildeMessage,
-        search.polyTarget+1, // add 1 to avoid "target 0"
+        search.polyTarget,
         `${QUEUE_STATUS.AVAILABLE} ${result}`
     );
     // Remove search from queue
@@ -40,7 +40,7 @@ export function* searchWordErrorSaga(action) {
     // Output message to max poly~ object
     yield call(
         maxPolyTildeMessage,
-        search.polyTarget+1, // add 1 to avoid "target 0"
+        search.polyTarget,
         QUEUE_STATUS.FAILED
     );
     // Remove search from queue
@@ -55,7 +55,7 @@ export function* searchWordTimeoutSaga(action) {
     ));
     yield call(
         maxPolyTildeMessage,
-        search.polyTarget+1, // add 1 to avoid "target 0"
+        search.polyTarget,
         QUEUE_STATUS.TIMEOUT
     );
     // Remove search from queue
