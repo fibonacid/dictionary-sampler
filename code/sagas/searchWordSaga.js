@@ -43,17 +43,17 @@ export function* searchWordSaga(action) {
  * ADD SEARCH TO QUEUE
  * ========================= */
 
+    // 1. Increase search count
+    yield put(increaseSearchCountAction());
     // 2. Generate an ID
     const searchCount = yield select(searchCountSelector);
     const searchId = `${searchCount}-${query}`;
-
     // 3. Add search to queue
     yield put(addSearchToQueueAction(searchId, query, searchCount));
-
     // Output max poly~ message "queued"
     yield call(maxPolyTildeMessage, searchCount, QUEUE_STATUS.QUEUED);
     // Refresh Max dictionary
-    yield call(maxSendRefresh);
+    //yield call(maxSendRefresh);
 
 /* ==============================
  *  RESPOND TO QUERY
