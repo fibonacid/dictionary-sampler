@@ -12,12 +12,10 @@ export function* addSearchToQueueWatcher() {
 
 export function* addSearchToQueueSaga(action) {
     const { polyTarget, status, query } = action.payload.args;
-    // Increase search count
-    yield put(increaseSearchCountAction());
     // Output max poly~ message "queued"
     yield call(maxPolyTildeMessage, polyTarget, status);
     // Refresh Max dictionary
-    yield call(maxSendRefresh);
+    //yield call(maxSendRefresh);
     // Generate an ID
     const searchCount = yield select(searchCountSelector);
     // Return ID
