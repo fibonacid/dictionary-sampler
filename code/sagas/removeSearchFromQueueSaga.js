@@ -8,5 +8,5 @@ export function* removeSearchFromQueueWatcher() {
 
 export function* removeSearchFromQueueSaga(action) {
     const { searchId } = action.payload;
-    yield put(decreaseSearchCountAction(searchId));
+    //yield put(decreaseSearchCountAction(searchId));
 }
