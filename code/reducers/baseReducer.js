@@ -23,13 +23,13 @@ export const baseReducer = (state=initialState, action) => {
 
 function digestDecreaseSearchCount(state) {
     const { searchCount } = state;
-    let count = searchCount-1 >= 0 ? searchCount-1 : 0;
+    let count = searchCount-1 >= 0 ? searchCount-1 : 1;
     return { ...state, searchCount: count }
 }
 
 function digestIncreaseSearchCount(state) {
     const { searchCount, maxSearches } = state;
-    let count = searchCount+1 < maxSearches ? searchCount+1 : 0;
+    let count = searchCount+1 < maxSearches ? searchCount+1 : 1;
     return { ...state, searchCount: count }
 }
 
