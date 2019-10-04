@@ -7,8 +7,11 @@ code/node_modules
 # Jetbrains IDE
 .idea
 
-# Max Project
+# Max Application
 *.maxproj
+_DeletedItems
+recordings/*
+!recordings/.gitkeep
 
 # Webpack
 code/dist/*
@@ -23,3 +26,4 @@ logs/*.log
 
 # Environment
 .env
+
