@@ -8,7 +8,7 @@
     "babel-polyfill": "^6.26.0",
     "cli-color": "^1.4.0",
     "dotenv-webpack": "^1.7.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.13",
     "path": "^0.12.7",
     "prettier": "^1.17.1",
     "redux": "^4.0.1",
