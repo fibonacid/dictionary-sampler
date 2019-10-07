@@ -27,3 +27,5 @@ logs/*.log
 # Environment
 .env
 
+# Media
+media
